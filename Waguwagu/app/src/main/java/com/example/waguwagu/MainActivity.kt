@@ -3,6 +3,11 @@ package com.example.waguwagu
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.waguwagu.ui.home.*
+import com.example.waguwagu.ui.mymenu.*
+import com.example.waguwagu.ui.orderlist.*
+import com.example.waguwagu.ui.searchbar.*
+import com.example.waguwagu.ui.searchmap.*
 
 
 class MainActivity : AppCompatActivity() {

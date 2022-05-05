@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchmapFragment">
+    tools:context=".ui.searchmap.SearchmapFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
