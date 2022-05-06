@@ -21,13 +21,16 @@
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable/button_round.xml" value="0.1" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable/component_round.xml" value="0.1955" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable/edit_round.xml" value="0.1" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.33004926108374383" />
+        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable/ic_searchmap.xml" value="0.242" />
+        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/fragment_home.xml" value="0.358695652173913" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/fragment_searchbar.xml" value="0.1" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/fragment_searchmap.xml" value="0.25" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/search.xml" value="0.22" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/search_list_item.xml" value="0.1" />
+        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/search_menu.xml" value="0.3515625" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/menu/navi_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/menu/search_bar.xml" value="0.36614583333333334" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2655" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.122" />
       </map>

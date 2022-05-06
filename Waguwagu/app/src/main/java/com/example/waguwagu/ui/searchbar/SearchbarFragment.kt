@@ -5,9 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.waguwagu.R
 import com.example.waguwagu.SearchAdapter
 import com.example.waguwagu.databinding.FragmentSearchbarBinding
 import com.example.waguwagu.model.data.SearchData
@@ -40,12 +37,13 @@ class SearchbarFragment : Fragment() {
             }
         }
 
-        if(!searched_data.isEmpty()) {
-            binding.searchRecyclerview.adapter = SearchAdapter(searched_data)
-            binding.resultText.setVisibility(View.GONE)
-        }
-        else {
-            binding.resultText.text = "일치하는 음식점이 없습니다."
+        if(!searchkey.isNullOrBlank()) {
+            if (!searched_data.isEmpty()) {
+                binding.searchRecyclerview.adapter = SearchAdapter(searched_data)
+                binding.resultText.setVisibility(View.GONE)
+            } else {
+                binding.resultText.text = "일치하는 음식점이 없습니다."
+            }
         }
 
 

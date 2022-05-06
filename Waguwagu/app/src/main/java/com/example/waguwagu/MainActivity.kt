@@ -1,10 +1,14 @@
 package com.example.waguwagu
 
+import android.app.SearchManager
+import android.content.Context
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.widget.EditText
 import android.widget.SearchView
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.waguwagu.ui.home.*
 import com.example.waguwagu.ui.mymenu.*
@@ -13,14 +17,17 @@ import com.example.waguwagu.ui.searchbar.*
 import com.example.waguwagu.ui.searchmap.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     val searchbarFragment = SearchbarFragment()
+    private lateinit var mySearchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+
 
         // 하단 탭이 눌렸을 때 화면을 전환하기 위해선 이벤트 처리하기 위해 BottomNavigationView 객체 생성
         var bnv_main = findViewById(R.id.bnv_main) as BottomNavigationView
@@ -56,23 +63,37 @@ class MainActivity : AppCompatActivity() {
             selectedItemId = R.id.home
         }
 
-        var searchbar = findViewById<SearchView>(R.id.searchview)
-
-        searchbar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                setDataAtFragment(searchbarFragment, query!!)
-                supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchbarFragment).commit()
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-        })
-
     }
 
-    fun setDataAtFragment(fragment: Fragment, string: String){
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.search_bar, menu)
+/*
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        this.mySearchView = menu?.findItem(R.id.action_search)?.actionView as SearchView
+
+        this.mySearchView.apply{
+            this.queryHint = "배고파!!"
+            this.setOnQueryTextListener(this@MainActivity)
+        }
+
+*/
+            return true
+
+        }
+
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        //setDataAtFragment(searchbarFragment, p0)
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        return true
+    }
+
+
+    fun setDataAtFragment(fragment: Fragment, string: String?){
         val bundle = Bundle()
         bundle.putString("query", string)
 
