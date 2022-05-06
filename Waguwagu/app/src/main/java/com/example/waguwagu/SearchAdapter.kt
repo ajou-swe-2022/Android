@@ -1,23 +1,21 @@
 package com.example.waguwagu
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.waguwagu.databinding.SearchListItemBinding
 import com.example.waguwagu.model.data.SearchData
 
-class SearchAdapter (val context: Context, val data:List<SearchData>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
 
-    inner class SearchViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        private val Fullname : TextView = itemView.findViewById(R.id.rest_name)
-        private val Quiz : TextView = itemView.findViewById(R.id.rest_tag)
-
+    inner class SearchViewHolder(private val binding : SearchListItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(searchData: SearchData){
-                Fullname.text = searchData.fullname
-                Quiz.text = searchData.quiz
+                binding.restName.text = searchData.restname
+                binding.restTag.text = searchData.resttag
+                binding.restAdmit.text = searchData.restadmit.toString()
+                binding.restSeatNum.text = searchData.restseatnum.toString()
+                binding.reserveTime.text = searchData.reservetime.toString()
             }
     }
 
@@ -25,8 +23,8 @@ class SearchAdapter (val context: Context, val data:List<SearchData>) : Recycler
     //ViewHolder에 쓰일 Layout을 inflate하는 함수
     //ViewGroup의 context를 사용하여 특정 화면에서 구현할 수 있도록 함
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.search_list_item, parent, false)
-        return SearchViewHolder(view)
+        val binding = SearchListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SearchViewHolder(binding)
     }
 
     //상속받으면 자동 생성
@@ -37,5 +35,4 @@ class SearchAdapter (val context: Context, val data:List<SearchData>) : Recycler
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(data[position])
     }
-
 }

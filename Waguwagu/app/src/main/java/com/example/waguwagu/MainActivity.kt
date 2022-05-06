@@ -3,6 +3,9 @@ package com.example.waguwagu
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.widget.SearchView
+import androidx.fragment.app.Fragment
 import com.example.waguwagu.ui.home.*
 import com.example.waguwagu.ui.mymenu.*
 import com.example.waguwagu.ui.orderlist.*
@@ -12,9 +15,12 @@ import com.example.waguwagu.ui.searchmap.*
 
 class MainActivity : AppCompatActivity() {
 
+    val searchbarFragment = SearchbarFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         // 하단 탭이 눌렸을 때 화면을 전환하기 위해선 이벤트 처리하기 위해 BottomNavigationView 객체 생성
         var bnv_main = findViewById(R.id.bnv_main) as BottomNavigationView
@@ -33,7 +39,6 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchmapFragment).commit()
                 }
                 R.id.searchbar -> {
-                    val searchbarFragment = SearchbarFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchbarFragment).commit()
                 }
                 R.id.orderlist -> {
@@ -47,8 +52,30 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
             selectedItemId = R.id.home
         }
 
+        var searchbar = findViewById<SearchView>(R.id.searchview)
+
+        searchbar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                setDataAtFragment(searchbarFragment, query!!)
+                supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchbarFragment).commit()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+
+    }
+
+    fun setDataAtFragment(fragment: Fragment, string: String){
+        val bundle = Bundle()
+        bundle.putString("query", string)
+
+        fragment.arguments = bundle
     }
 }

@@ -15,18 +15,23 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
-        <ScrollView
-            android:id="@+id/Searchbar_scroll"
+        <TextView
+            android:id="@+id/result_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/please_enter"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:id="@+id/search_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/search_list_item" />
     </LinearLayout>
 
 </FrameLayout>
