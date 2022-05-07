@@ -63,6 +63,11 @@ class MainActivity : AppCompatActivity()  {
                         supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchbarFragment).commit()
                         selectedItemId = R.id.searchbar
                     }
+                    else {
+                        supportFragmentManager.beginTransaction().detach(searchbarFragment).commitNowAllowingStateLoss()
+                        supportFragmentManager.beginTransaction().attach(searchbarFragment).commitAllowingStateLoss()
+                    }
+                    searchview.clearFocus()
                     return false
                 }
 
