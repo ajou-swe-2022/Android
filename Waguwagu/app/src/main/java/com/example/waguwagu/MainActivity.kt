@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity()  {
         }
 
             selectedItemId = R.id.home
-
+            // searchview 읽어들일 수가 없음
             binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(p0: String): Boolean {
                     setDataAtFragment(searchbarFragment, p0)
