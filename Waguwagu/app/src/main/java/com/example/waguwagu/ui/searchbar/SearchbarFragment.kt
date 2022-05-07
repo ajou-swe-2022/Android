@@ -1,6 +1,7 @@
 package com.example.waguwagu.ui.searchbar
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,9 @@ class SearchbarFragment : Fragment() {
             } else {
                 binding.resultText.text = "일치하는 음식점이 없습니다."
             }
+        }
+        else{
+            binding.searchRecyclerview.adapter = SearchAdapter(datas)
         }
 
 
