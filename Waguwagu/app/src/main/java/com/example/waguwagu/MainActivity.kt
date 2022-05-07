@@ -4,8 +4,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import com.example.waguwagu.databinding.ActivityMainBinding
 import com.example.waguwagu.ui.home.*
 import com.example.waguwagu.ui.mymenu.*
 import com.example.waguwagu.ui.orderlist.*
@@ -14,15 +14,12 @@ import com.example.waguwagu.ui.searchmap.*
 
 class MainActivity : AppCompatActivity()  {
 
-    lateinit var binding : ActivityMainBinding
     val searchbarFragment = SearchbarFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.my_toolbar)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        var searchview : SearchView = findViewById(R.id.search_view)
 
         // 하단 탭이 눌렸을 때 화면을 전환하기 위해선 이벤트 처리하기 위해 BottomNavigationView 객체 생성
         var bnv_main = findViewById(R.id.bnv_main) as BottomNavigationView
@@ -57,16 +54,18 @@ class MainActivity : AppCompatActivity()  {
 
             selectedItemId = R.id.home
             // searchview 읽어들일 수가 없음
-            binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(p0: String): Boolean {
-                    setDataAtFragment(searchbarFragment, p0)
-                    Log.d("tag", "text submit")
+
+
+            searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    setDataAtFragment(searchbarFragment, query)
                     supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchbarFragment).commit()
+                    selectedItemId = R.id.searchbar
                     return true
                 }
 
-                override fun onQueryTextChange(p0: String): Boolean {
-                    return true
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
                 }
             })
 
@@ -75,10 +74,9 @@ class MainActivity : AppCompatActivity()  {
 
     }
 
-    fun setDataAtFragment(fragment: Fragment, string: String){
+    fun setDataAtFragment(fragment: Fragment, string: String?){
         val bundle = Bundle()
         bundle.putString("query", string)
-        Log.d("tag", "text submit")
 
         fragment.arguments = bundle
     }
