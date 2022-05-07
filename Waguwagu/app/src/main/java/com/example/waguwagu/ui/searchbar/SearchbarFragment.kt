@@ -5,9 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import com.example.waguwagu.R
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.waguwagu.SearchAdapter
 import com.example.waguwagu.databinding.FragmentSearchbarBinding
 import com.example.waguwagu.model.data.SearchData
@@ -20,8 +20,9 @@ class SearchbarFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         val binding = FragmentSearchbarBinding.inflate(inflater, container, false)
         val datas = mutableListOf<SearchData>()
-        val searched_data = mutableListOf<SearchData>()
         var searchkey = arguments?.getString("query")
+        val searched_data = mutableListOf<SearchData>()
+
 
         datas.apply {
             add(SearchData("McDonalds", "Hamburger", 3, 12, 30))
@@ -53,14 +54,11 @@ class SearchbarFragment : Fragment() {
             binding.searchRecyclerview.adapter = SearchAdapter(datas)
         }
 
-
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-
 
 }

@@ -13,7 +13,8 @@
         app:contentInsetStart="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/lemon">
+        android:background="@color/lemon"
+        android:focusableInTouchMode="true">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:paddingEnd="16dp"            >
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
@@ -41,6 +42,7 @@
     <FrameLayout android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/fl_container"
+        android:layout_marginTop="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bnv_main"
         app:layout_constraintLeft_toLeftOf="parent"

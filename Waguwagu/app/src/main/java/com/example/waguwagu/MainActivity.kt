@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.waguwagu.ui.home.*
 import com.example.waguwagu.ui.mymenu.*
 import com.example.waguwagu.ui.orderlist.*
@@ -15,6 +17,7 @@ import com.example.waguwagu.ui.searchmap.*
 class MainActivity : AppCompatActivity()  {
 
     val searchbarFragment = SearchbarFragment()
+    val homeFragment = HomeFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,6 @@ class MainActivity : AppCompatActivity()  {
             when(it.itemId) {
                 R.id.home -> {
                     // 다른 프래그먼트 화면으로 이동하는 기능
-                    val homeFragment = HomeFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeFragment).commit()
                 }
                 R.id.searchmap -> {
@@ -53,15 +55,15 @@ class MainActivity : AppCompatActivity()  {
         }
 
             selectedItemId = R.id.home
-            // searchview 읽어들일 수가 없음
-
 
             searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     setDataAtFragment(searchbarFragment, query)
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchbarFragment).commit()
-                    selectedItemId = R.id.searchbar
-                    return true
+                    if(selectedItemId != R.id.searchbar) {
+                        supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchbarFragment).commit()
+                        selectedItemId = R.id.searchbar
+                    }
+                    return false
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
@@ -80,4 +82,5 @@ class MainActivity : AppCompatActivity()  {
 
         fragment.arguments = bundle
     }
+
 }
