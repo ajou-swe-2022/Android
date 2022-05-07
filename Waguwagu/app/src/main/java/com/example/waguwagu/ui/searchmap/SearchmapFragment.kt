@@ -95,7 +95,8 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
         //지도 초기 확대.
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15.7f))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(ajou))
-        googleMap.setOnMarkerClickListener (this);
+        googleMap.setOnMarkerClickListener (this)
+        googleMap.setOnMapClickListener(this)
     }
 
     override fun onMarkerClick(p0: Marker) : Boolean {
@@ -138,9 +139,11 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
     }
 
     override fun onMapClick(latLng: LatLng) {
+
         prev_marker?.setIcon(bitmapDescriptorFromVector(mContext,R.drawable.marker_unclicked))
         prev_marker=null;
         cardview.visibility = View.GONE
+        return
     }
 
 
