@@ -4,34 +4,44 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.121" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/ic_searchbar.xml" value="0.2405" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/ic_searchmap.xml" value="0.121" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/marker_clicked.xml" value="0.2405" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/marker_unclicked.xml" value="0.2405" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_board.xml" value="0.21920289855072464" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_home.xml" value="0.21920289855072464" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_orderlist.xml" value="0.19701086956521738" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_reserve_menu.xml" value="0.18885869565217392" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_reserve_table.xml" value="0.18885869565217392" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_searchbar.xml" value="0.19701086956521738" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_searchmap.xml" value="0.19701086956521738" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_mymenu.xml" value="0.18885869565217392" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_orderlist.xml" value="0.18885869565217392" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_searchbar.xml" value="0.25364583333333335" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_searchmap.xml" value="0.18885869565217392" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_setting.xml" value="0.21920289855072464" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/order_list_item.xml" value="0.4" />
-        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/search_list_item.xml" value="0.264" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/menu/navi_menu.xml" value="0.25" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable-small/ic_maker_click.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/button_round.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/component_round.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_home.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_mymenu.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_orderlist.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_searchbar.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_searchmap.xml" value="0.2775" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/location_marker.xml" value="0.13" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/marker.xml" value="0.13" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/marker_clicked.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/marker_unclicked.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/vector.xml" value="0.13" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_home.xml" value="0.21240942028985507" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_mymenu.xml" value="0.21240942028985507" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_orderlist.xml" value="0.20572916666666666" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_searchbar.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_searchmap.xml" value="0.25" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/order_list_item.xml" value="0.19947916666666668" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/search_list_item.xml" value="0.135678391959799" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/menu/navi_menu.xml" value="0.2046875" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2655" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable/border_shape.xml" value="0.1915" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable/button_round.xml" value="0.1" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable/component_round.xml" value="0.1955" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/drawable/edit_round.xml" value="0.1" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.33004926108374383" />
+        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/fragment_home.xml" value="0.358695652173913" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/fragment_orderlist.xml" value="0.36614583333333334" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/fragment_searchbar.xml" value="0.1" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/fragment_searchmap.xml" value="0.1" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/search.xml" value="0.22" />
-        <entry key="..\:/git/Android/Waguwagu/app/src/main/res/layout/search_list_item.xml" value="0.1" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/menu/navi_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2655" />
         <entry key="..\:/git/Android/Waguwagu/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.122" />
