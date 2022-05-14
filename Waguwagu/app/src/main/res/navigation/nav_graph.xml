@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/reservetableFragment">
+
+    <fragment
+        android:id="@+id/reservetableFragment"
+        android:name="com.example.waguwagu.ui.reserve.ReservetableFragment"
+        android:label="fragment_reservetable"
+        tools:layout="@layout/fragment_reservetable" >
+        <action
+            android:id="@+id/action_reservetableFragment_to_reservemenuFragment"
+            app:destination="@id/reservemenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reservemenuFragment"
+        android:name="com.example.waguwagu.ui.reserve.ReservemenuFragment"
+        android:label="fragment_reservemenu"
+        tools:layout="@layout/fragment_reservemenu" >
+        <action
+            android:id="@+id/action_reservemenuFragment_to_reservetableFragment"
+            app:destination="@id/reservetableFragment" />
+    </fragment>
+</navigation>
