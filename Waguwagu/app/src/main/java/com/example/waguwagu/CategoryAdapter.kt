@@ -20,24 +20,13 @@ class CategoryAdapter(val data:List<String>,val fragment: HomeFragment) : Recycl
 
         init {
           binding.categoryName.setOnClickListener {
-                       fragment.delivercatgory(binding.categoryName.text.toString())
-
+              (fragment.activity as MainActivity).setCategory(binding.categoryName.text.toString())
           }
-
-
-
           }
-
-
-
         fun setData(string: String){
             binding.categoryName.text = string
-
-
         }
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
 
