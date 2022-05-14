@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.renderscript.ScriptGroup
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -57,8 +57,7 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
 
     }
 
-    private lateinit var mView: MapView
-    private lateinit var cardview: CardView
+
     private lateinit var rootView:View
     val datas = mutableListOf<SearchData>()
     lateinit var binding:FragmentSearchmapBinding

@@ -12,18 +12,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="197dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/component_round"
             android:orientation="vertical">
 
-
             <TextView
-                android:id="@+id/result_text"
+                android:id="@+id/result_text1"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -31,47 +29,95 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_recyclerview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+
+
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/category_button"
+                    tools:orientation="horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_recyclerview2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
 
-                    <ImageButton
-                        android:id="@+id/imageButton3"
-                        android:layout_width="59dp"
-                        android:layout_height="29dp"
-                        android:padding="0dp"
-                        android:src="@drawable/ic_category" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:orientation="horizontal"
+                    tools:listitem="@layout/category_button" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="59dp"
-                        android:layout_height="29dp"
-                        android:padding="0dp"
-                        android:src="@drawable/ic_category" />
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="59dp"
-                android:layout_height="29dp"
-                android:padding="0dp"
-                android:src="@drawable/ic_category" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_recyclerview3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
 
-            <ImageButton
-                android:id="@+id/imageButton1"
-                android:layout_width="59dp"
-                android:layout_height="29dp"
-                android:padding="0dp"
-                android:src="@drawable/ic_category" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:orientation="horizontal"
+                    tools:listitem="@layout/category_button" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_recyclerview4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:orientation="horizontal"
+                    tools:listitem="@layout/category_button" />
+            </LinearLayout>
+
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/result_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="내 주변 음식점"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/search_list_item" />
+
 
     </LinearLayout>
 

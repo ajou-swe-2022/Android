@@ -4,6 +4,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -18,11 +19,18 @@ class MainActivity : AppCompatActivity()  {
 
     val searchbarFragment = SearchbarFragment()
     val homeFragment = HomeFragment()
+    companion object{
+        private var instance:MainActivity? = null
+        fun getInstance(): MainActivity? {
+            return instance
+        }
+    }
 
+    var  searchview:SearchView?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var searchview : SearchView = findViewById(R.id.search_view)
+        searchview = findViewById(R.id.search_view)
 
         // 하단 탭이 눌렸을 때 화면을 전환하기 위해선 이벤트 처리하기 위해 BottomNavigationView 객체 생성
         var bnv_main = findViewById(R.id.bnv_main) as BottomNavigationView
@@ -56,7 +64,7 @@ class MainActivity : AppCompatActivity()  {
 
             selectedItemId = R.id.home
 
-            searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            searchview?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     setDataAtFragment(searchbarFragment, query)
                     if(selectedItemId != R.id.searchbar) {
@@ -67,7 +75,7 @@ class MainActivity : AppCompatActivity()  {
                         supportFragmentManager.beginTransaction().detach(searchbarFragment).commitNowAllowingStateLoss()
                         supportFragmentManager.beginTransaction().attach(searchbarFragment).commitAllowingStateLoss()
                     }
-                    searchview.clearFocus()
+                    searchview?.clearFocus()
                     return false
                 }
 
@@ -86,6 +94,17 @@ class MainActivity : AppCompatActivity()  {
         bundle.putString("query", string)
 
         fragment.arguments = bundle
+    }
+    fun setCategory(string: String?){
+        //searchview?.setQuery(string,true)
+        Toast.makeText(this@MainActivity, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
+
+
+    }
+    fun text() {
+        homeFragment.binding.categoryRecyclerview1.adapter=CategoryAdapter(mutableListOf("확인"))
+        Toast.makeText(this@MainActivity, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
+
     }
 
 }
