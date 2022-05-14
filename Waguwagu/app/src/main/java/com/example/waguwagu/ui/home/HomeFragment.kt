@@ -19,8 +19,8 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class HomeFragment : Fragment() {
-
+class HomeFragment : Fragment()  {
+    lateinit var HContext: Context
 
 
     lateinit var binding:FragmentHomeBinding
@@ -28,6 +28,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -73,16 +74,16 @@ class HomeFragment : Fragment() {
             add(SearchData("푸라닭", "한식", 3, 12, 30))
             add(SearchData("팔달관매점", "호텔", 3, 12, 30))
         }
-        binding.categoryRecyclerview1.adapter=CategoryAdapter(datas1)
-        binding.categoryRecyclerview2.adapter=CategoryAdapter(datas2)
-        binding.categoryRecyclerview3.adapter=CategoryAdapter(datas3)
-        binding.categoryRecyclerview4.adapter=CategoryAdapter(datas4)
+        binding.categoryRecyclerview1.adapter=CategoryAdapter(datas1,this@HomeFragment)
+        binding.categoryRecyclerview2.adapter=CategoryAdapter(datas2,this@HomeFragment)
+        binding.categoryRecyclerview3.adapter=CategoryAdapter(datas3,this@HomeFragment)
+        binding.categoryRecyclerview4.adapter=CategoryAdapter(datas4,this@HomeFragment)
         binding.searchRecyclerview.adapter=SearchAdapter(datas)
         return binding.root
     }
 
 
-    /*
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -102,6 +103,9 @@ class HomeFragment : Fragment() {
                 }
             }
     }
+    fun delivercatgory(string:String) {
+        return (activity as MainActivity).setCategory(string);
+    }
 
-     */
+
 }

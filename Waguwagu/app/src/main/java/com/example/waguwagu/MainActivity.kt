@@ -19,12 +19,7 @@ class MainActivity : AppCompatActivity()  {
 
     val searchbarFragment = SearchbarFragment()
     val homeFragment = HomeFragment()
-    companion object{
-        private var instance:MainActivity? = null
-        fun getInstance(): MainActivity? {
-            return instance
-        }
-    }
+
 
     var  searchview:SearchView?=null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,14 +91,18 @@ class MainActivity : AppCompatActivity()  {
         fragment.arguments = bundle
     }
     fun setCategory(string: String?){
-        //searchview?.setQuery(string,true)
-        Toast.makeText(this@MainActivity, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
+        searchview?.setQuery(string,true)
+        //Log.d("chegking","why not fun")
+        //Toast.makeText(this@MainActivity, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
 
 
     }
     fun text() {
-        homeFragment.binding.categoryRecyclerview1.adapter=CategoryAdapter(mutableListOf("확인"))
-        Toast.makeText(this@MainActivity, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
+        Log.d("chegking","why not fun")
+
+
+    }
+    fun getContext() {
 
     }
 
