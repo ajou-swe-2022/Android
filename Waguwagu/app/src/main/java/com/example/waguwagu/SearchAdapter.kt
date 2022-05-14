@@ -1,13 +1,16 @@
 package com.example.waguwagu
 
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.menu.MenuView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.waguwagu.databinding.SearchListItemBinding
 import com.example.waguwagu.model.data.SearchData
 
 class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-
 
     inner class SearchViewHolder(private val binding : SearchListItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(searchData: SearchData){
@@ -34,5 +37,12 @@ class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAda
     //ViewHolder에서 데이터 묶는 함수가 실행되는 곳
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(data[position])
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView?.context, ReservationActivity::class.java)
+            intent.putExtra("restname", data[position].restname)
+            intent.putExtra("reservetime", data[position].reservetime.toString())
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 }
