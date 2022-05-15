@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.waguwagu.model.data.UserData
 import com.example.waguwagu.ui.home.*
 import com.example.waguwagu.ui.mymenu.*
 import com.example.waguwagu.ui.orderlist.*
@@ -19,6 +20,8 @@ class MainActivity : AppCompatActivity()  {
 
     val searchbarFragment = SearchbarFragment()
     val homeFragment = HomeFragment()
+    var userdata: UserData?=null
+
 
 
     var  searchview:SearchView?=null
@@ -26,6 +29,9 @@ class MainActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         searchview = findViewById(R.id.search_view)
+        //임시 유저 데이터
+        userdata=UserData("뿡빵이","BungBang0123","wakwak0101","010-1010-1010","wakwak0101@gmail.com")
+
 
         // 하단 탭이 눌렸을 때 화면을 전환하기 위해선 이벤트 처리하기 위해 BottomNavigationView 객체 생성
         var bnv_main = findViewById(R.id.bnv_main) as BottomNavigationView

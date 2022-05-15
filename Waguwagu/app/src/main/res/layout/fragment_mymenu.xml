@@ -1,14 +1,166 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mymenu.MymenuFragment">
+    android:background="@color/slight_yellow"
+    tools:context=".ui.home.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="258dp"
+                android:layout_margin="16dp">
+
+                <ImageView
+                    android:id="@+id/Image1"
+                    android:layout_width="276dp"
+                    android:layout_height="194dp"
+                    android:layout_centerInParent="true"
+                    android:background="#4CAF50"
+                    android:src="@drawable/mymenu_example"
+                    android:textSize="24sp" />
+
+
+            </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                tools:text="test"></TextView>
+
+            <EditText
+                android:id="@+id/ed_text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_mymenu_text"
+                android:textSize="20dp"
+
+                tools:text="test"></EditText>
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="아이디"
+                tools:text="test"></TextView>
+
+            <EditText
+                android:id="@+id/ed_text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_mymenu_text"
+                android:textSize="20dp"
+                tools:text="test"></EditText>
+
+            <TextView
+                android:id="@+id/text3"
+                android:text="비밀번호"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="test"></TextView>
+
+            <EditText
+                android:id="@+id/ed_text3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_mymenu_text"
+                android:textSize="20dp"
+                tools:text="test"></EditText>
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="핸드폰 번호"
+                tools:text="test"></TextView>
+
+            <EditText
+                android:id="@+id/ed_text4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_mymenu_text"
+                android:textSize="20dp"
+                tools:text="test"></EditText>
+
+            <TextView
+                android:id="@+id/text5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="이메일"
+                tools:text="test"></TextView>
+
+            <EditText
+                android:id="@+id/ed_text5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_mymenu_text"
+                android:textSize="20dp"
+                android:text="why"
+                tools:text="test"></EditText>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+
+                android:layout_marginStart="5dp"
+                android:background="@drawable/ic_category"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textSize="15dp"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:text="적용" />
+
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+
+
+                android:layout_toEndOf="@id/accept"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_category"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textSize="15dp"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:text="로그아웃" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 </FrameLayout>
