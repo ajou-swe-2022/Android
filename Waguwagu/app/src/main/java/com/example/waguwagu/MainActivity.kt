@@ -103,13 +103,6 @@ class MainActivity : AppCompatActivity()  {
 
 
     }
-    fun text() {
-        Log.d("chegking","why not fun")
 
-
-    }
-    fun getContext() {
-
-    }
 
 }

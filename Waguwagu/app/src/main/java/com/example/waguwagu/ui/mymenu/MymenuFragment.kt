@@ -2,6 +2,7 @@ package com.example.waguwagu.ui.mymenu
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +31,7 @@ class MymenuFragment : Fragment() {
 
     lateinit var mContext: Context
     lateinit var binding: FragmentMymenuBinding
-    private var tempuser: UserData?=null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +52,8 @@ class MymenuFragment : Fragment() {
         binding.edText4.setText(tempuser?.userphone)
         binding.edText5.setText(tempuser?.userEmail)
         binding.accept.setOnClickListener {
-            (activity as MainActivity).userdata=tempuser
+
+            (activity as MainActivity).userdata=UserData(binding.edText1.text.toString(),binding.edText2.text.toString(),binding.edText3.text.toString(),binding.edText4.text.toString(),binding.edText5.text.toString())
 
         }
 
