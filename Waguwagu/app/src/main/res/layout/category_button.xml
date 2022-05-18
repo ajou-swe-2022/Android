@@ -8,13 +8,14 @@
     android:orientation="vertical">
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:id="@+id/category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FDB165"
+        android:background="@drawable/ic_category"
         android:layout_marginStart="5dp"
         android:textColor="@color/black"
         android:textSize="15dp"
