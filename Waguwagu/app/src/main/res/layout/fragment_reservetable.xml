@@ -26,6 +26,7 @@
             app:srcCompat="@drawable/seat_example" />
 
         <TextView
+            android:id="@+id/rest_name_wrap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -37,6 +38,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/reserve_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"

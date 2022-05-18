@@ -4,13 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.waguwagu.databinding.ReserveTableBinding
 import com.example.waguwagu.model.data.TableData
-import com.example.waguwagu.ui.reserve.ReservetableFragment
 
 class TableAdapter (val data:List<TableData>) : RecyclerView.Adapter<TableAdapter.TableViewHolder>() {
 
@@ -20,6 +18,7 @@ class TableAdapter (val data:List<TableData>) : RecyclerView.Adapter<TableAdapte
         @SuppressLint("ResourceAsColor")
         fun bind(tableData: TableData){
                 binding.seatNum.text = tableData.table_num
+                binding.tableId.text = tableData.table_id + "번 테이블"
 
                 if(tableData.table_access){
                     binding.button.text = "예약"
@@ -56,6 +55,7 @@ class TableAdapter (val data:List<TableData>) : RecyclerView.Adapter<TableAdapte
             if(data[position].table_access) {
                 val intent = Intent(holder.itemView?.context, ReservenotiActivity::class.java)
                 intent.putExtra("table_id", data[position].table_id)
+                intent.putExtra("minimum_price", data[position].minimum_price)
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
             }
         }

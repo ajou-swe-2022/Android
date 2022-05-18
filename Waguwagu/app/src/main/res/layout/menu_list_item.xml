@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+
+    <ImageView
+        android:id="@+id/menu_img"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="left"
+        app:srcCompat="@drawable/menu_example" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="left">
+
+        <TextView
+            android:id="@+id/menu_name"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="40dp"
+            android:text="빅맥"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/menu_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3500원"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="right"
+        android:layout_marginRight="30dp">
+
+        <android.widget.Button
+            android:id="@+id/minus_menu"
+            android:layout_width="24dp"
+            android:layout_height="36dp"
+            android:background="@drawable/button_left"
+            android:text="–"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:layout_gravity="right"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/selected_num"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:background="@drawable/button_middle"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:gravity="center"/>
+
+        <android.widget.Button
+            android:id="@+id/plus_menu"
+            android:layout_width="24dp"
+            android:layout_height="36dp"
+            android:background="@drawable/button_right"
+            android:text="+"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:layout_gravity="right"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</LinearLayout>

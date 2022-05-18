@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import com.example.waguwagu.ui.reserve.ReservemenuFragment
 import com.example.waguwagu.ui.reserve.ReservetableFragment
 
@@ -25,6 +26,7 @@ class ReservenotiActivity : AppCompatActivity() {
 
         val reservemenuFragment = ReservemenuFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fl_container, reservemenuFragment).commit()
+        setDataAtFragment(reservemenuFragment, intent.getIntExtra("minimum_price", 0))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -36,5 +38,12 @@ class ReservenotiActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun setDataAtFragment(fragment: Fragment, price: Int){
+        val bundle = Bundle()
+        bundle.putInt("query", price)
+
+        fragment.arguments = bundle
     }
 }

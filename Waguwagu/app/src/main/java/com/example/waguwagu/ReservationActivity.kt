@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -28,8 +29,11 @@ class ReservationActivity : AppCompatActivity() {
         val restname = findViewById<TextView>(R.id.rest_name)
         restname.text = name
 
+        val query = arrayOf<String>(name!!, time!!)
+
         val reservetableFragment = ReservetableFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fl_container, reservetableFragment).commit()
+        setDataAtFragment(reservetableFragment, query)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -41,5 +45,12 @@ class ReservationActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun setDataAtFragment(fragment: Fragment, strings: Array<String>?){
+        val bundle = Bundle()
+        bundle.putStringArray("query", strings)
+
+        fragment.arguments = bundle
     }
 }
