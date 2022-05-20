@@ -22,6 +22,7 @@
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/button_round.xml" value="0.1" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/component_round.xml" value="0.1" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_category.xml" value="0.1135" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_category2.xml" value="0.2505" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_mymenu.xml" value="0.1" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/ic_orderlist.xml" value="0.1" />
@@ -34,14 +35,16 @@
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/menu.xml" value="0.1135" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable/vector.xml" value="0.13" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/activity_reservation.xml" value="0.259963768115942" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/activity_reservenoti.xml" value="0.22760416666666666" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/category_button.xml" value="0.6451612903225806" />
-        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_mymenu.xml" value="0.21240942028985507" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_mymenu.xml" value="0.19494584837545126" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_orderlist.xml" value="0.20572916666666666" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_searchbar.xml" value="0.1" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/fragment_searchmap.xml" value="0.25" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/order_list_item.xml" value="0.19947916666666668" />
+        <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/reserve_table.xml" value="0.259963768115942" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/search_list_item.xml" value="0.1" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/layout/search_list_item1.xml" value="0.28229166666666666" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/menu/navi_menu.xml" value="0.2046875" />

@@ -68,18 +68,21 @@ class HomeFragment : Fragment()  {
             add("패스트푸드")
             add("한식")
         }
+        /*
         datas.apply {
-            add(SearchData("McDonalds", "Hamburger", 3, 12, 30))
-            add(SearchData("롯데리아", "Hamburger", 3, 12, 30))
+            add(SearchData("McDonalds", "Hamburger", "3", "12", "30"))
+            add(SearchData("롯데리아", "Hamburger", 3, 12, "30"))
             add(SearchData("본죽", "한식", 3, 12, 30))
             add(SearchData("푸라닭", "한식", 3, 12, 30))
             add(SearchData("팔달관매점", "호텔", 3, 12, 30))
         }
+
+         */
         binding.categoryRecyclerview1.adapter=CategoryAdapter(datas1,this@HomeFragment)
         binding.categoryRecyclerview2.adapter=CategoryAdapter(datas2,this@HomeFragment)
         binding.categoryRecyclerview3.adapter=CategoryAdapter(datas3,this@HomeFragment)
         binding.categoryRecyclerview4.adapter=CategoryAdapter(datas4,this@HomeFragment)
-        binding.searchRecyclerview.adapter=SearchAdapter(datas)
+        //binding.searchRecyclerview.adapter=SearchAdapter(datas)
         return binding.root
     }
 

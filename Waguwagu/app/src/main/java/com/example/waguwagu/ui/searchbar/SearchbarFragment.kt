@@ -23,7 +23,7 @@ class SearchbarFragment : Fragment() {
         var searchkey = arguments?.getString("query")
         val searched_data = mutableListOf<SearchData>()
 
-
+/*
         datas.apply {
             add(SearchData("McDonalds", "Hamburger", 3, 12, 30))
             add(SearchData("롯데리아", "Hamburger", 3, 12, 30))
@@ -53,7 +53,7 @@ class SearchbarFragment : Fragment() {
         else{
             binding.searchRecyclerview.adapter = SearchAdapter(datas)
         }
-
+        */
         return binding.root
     }
 

@@ -18,7 +18,7 @@ class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAda
                 binding.restTag.text = searchData.resttag
                 binding.restAdmit.text = searchData.restadmit.toString()
                 binding.restSeatNum.text = searchData.restseatnum.toString()
-                binding.reserveTime.text = searchData.reservetime.toString()
+                //binding.reserveTime.text = searchData.reservetime.toString()
             }
     }
 
@@ -41,7 +41,7 @@ class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAda
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView?.context, ReservationActivity::class.java)
             intent.putExtra("restname", data[position].restname)
-            intent.putExtra("reservetime", data[position].reservetime.toString())
+           //intent.putExtra("reservetime", data[position].reservetime.toString())
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

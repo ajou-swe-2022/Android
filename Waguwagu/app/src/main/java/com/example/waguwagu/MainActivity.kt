@@ -1,5 +1,6 @@
 package com.example.waguwagu
 
+import android.content.ContentValues.TAG
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,23 +10,44 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.waguwagu.model.data.RestaurantsData
+import com.example.waguwagu.model.data.SearchData
 import com.example.waguwagu.model.data.UserData
 import com.example.waguwagu.ui.home.*
 import com.example.waguwagu.ui.mymenu.*
 import com.example.waguwagu.ui.orderlist.*
 import com.example.waguwagu.ui.searchbar.*
 import com.example.waguwagu.ui.searchmap.*
+import com.google.android.gms.common.internal.service.Common.API
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+import retrofit2.http.GET
+
 
 class MainActivity : AppCompatActivity()  {
 
+
+    val BASE_URL_API = "https://diunbu3dmy.ap-northeast-1.awsapprunner.com:443/api/v1/"
+    val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL_API)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    val api = retrofit.create(resinterface::class.java)
+
+
     val searchbarFragment = SearchbarFragment()
+
     val homeFragment = HomeFragment()
     var userdata: UserData?=null
-
-
-
     var  searchview:SearchView?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         searchview = findViewById(R.id.search_view)
@@ -103,6 +125,36 @@ class MainActivity : AppCompatActivity()  {
 
 
     }
+
+    fun RestDataAll(): Response<RestaurantsData>? {
+        return  SendAPI(api.getRes("ALL",.1,.1,""))
+
+    }
+    fun RestDataLoc(latitude: Double,longitude:Double): Response<RestaurantsData>? {
+        return  SendAPI(api.getRes("LOCATION",latitude,longitude,""))
+    }
+    fun RestDataName(Name:String): Response<RestaurantsData>? {
+        return SendAPI(api.getRes("NAME",.1,.1,Name))
+    }
+    fun SendAPI(sendUrl:Call<RestaurantsData> ) :Response<RestaurantsData>?{
+        var returnData:Response<RestaurantsData>?=null;
+        sendUrl.enqueue(object : Callback<RestaurantsData> {
+            override fun onResponse(
+                call: Call<RestaurantsData>,
+                response: Response<RestaurantsData>
+            ) {
+                Log.d(TAG, "성공 : ${response.raw()}")
+                Log.d(TAG, "성공 : ${response.body()}")
+                returnData=response
+
+            }
+            override fun onFailure(call: Call<RestaurantsData>, t: Throwable) {
+                Log.d(TAG, "실패 : $t")
+            }
+        })
+        return returnData;
+    }
+
 
 
 }

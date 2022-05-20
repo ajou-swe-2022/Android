@@ -20,7 +20,8 @@ class CategoryAdapter(val data:List<String>,val fragment: HomeFragment) : Recycl
 
         init {
           binding.categoryName.setOnClickListener {
-              (fragment.activity as MainActivity).setCategory(binding.categoryName.text.toString())
+              //(fragment.activity as MainActivity).setCategory(binding.categoryName.text.toString())
+              (fragment.activity as MainActivity).RestDataAll();
           }
           }
         fun setData(string: String){
@@ -38,6 +39,7 @@ class CategoryAdapter(val data:List<String>,val fragment: HomeFragment) : Recycl
 
 
     }
+
     override fun getItemCount(): Int = data.size
 
 

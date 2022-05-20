@@ -24,7 +24,7 @@ class OrderlistFragment : Fragment() {
         var binding = FragmentOrderlistBinding.inflate(inflater, container, false)
         val datas = mutableListOf<SearchData>()
         val dates = mutableListOf<String>()
-
+/*
         datas.apply {
             add(SearchData("McDonalds", "Hamburger", 3, 12, 30))
             add(SearchData("롯데리아", "Hamburger", 3, 12, 30))
@@ -43,7 +43,7 @@ class OrderlistFragment : Fragment() {
 
 
         binding.orderRecyclerview.adapter = OrderlistAdapter(datas, dates)
-
+*/
         return binding.root
     }
 }

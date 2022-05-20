@@ -66,14 +66,17 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        /*
         datas.apply {
             add(SearchData("McDonalds", "Hamburger", 3, 12, 30))
             add(SearchData("롯데리아", "Hamburger", 3, 12, 30))
             add(SearchData("본죽", "한식", 3, 12, 30))
             add(SearchData("푸라닭", "한식", 3, 12, 30))
             add(SearchData("팔달관매점", "호텔", 3, 12, 30))
-        }
+        } */
         binding=FragmentSearchmapBinding.inflate(inflater,container,false)
+
+
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.getMapAsync(this)
         rootView=binding.getRoot()
@@ -95,17 +98,17 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
         )?.tag=0
         //음식점 임시 주소 tag를 통해 객체를 지정할 수 있음
 
-        var k=datas.size
-        for(j in 0..(k-1)) {
+        //var k=datas.size
+        for(j in 0..(5-1)) {
             var temp=LatLng(37.282753,127.044999+(0.0006*(j+1)))
             googleMap.addMarker(
                 MarkerOptions()
                     .position(temp)
-                    .title("${datas[j].restname}")
-                    .snippet("${datas[j].resttag}")
+                    .title("${0}")
+                    .snippet("${1}")
                     .icon(bitmapDescriptorFromVector(mContext,R.drawable.marker_unclicked))
 
-            )?.tag=datas[j];
+            )?.tag=3;
         }
         //지도 초기 확대.
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15.7f))
@@ -127,7 +130,7 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
             //tag에 담긴 data 통해 등장할 cardview내의 정보값을 변경
                 p0.setIcon(bitmapDescriptorFromVector(mContext,R.drawable.marker_clicked))
 
-            binding.searchRecyclerview.adapter=SearchAdapter(mutableListOf<SearchData>(p0.tag as SearchData))
+            //binding.searchRecyclerview.adapter=SearchAdapter(mutableListOf<SearchData>(p0.tag as SearchData))
             binding.cardView.visibility=View.VISIBLE
             prev_marker=p0
         };
