@@ -1,6 +1,8 @@
 package com.example.waguwagu.ui.reserve
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.waguwagu.MenuAdapter
-import com.example.waguwagu.R
-import com.example.waguwagu.SelectmenuAdapter
+import android.widget.Toast
+import com.example.waguwagu.*
 import com.example.waguwagu.databinding.FragmentReservemenuBinding
 import com.example.waguwagu.model.data.MenuData
 
@@ -25,6 +26,7 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
     val selected_menus = mutableListOf<MenuData>()
     val numbers = mutableListOf<String>()
     val datas = mutableListOf<MenuData>()
+    lateinit var dialog : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +38,16 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
     ): View? {
         binding = FragmentReservemenuBinding.inflate(inflater, container, false)
         var link = getMenuSelected()
+        dialog = inflater.inflate(R.layout.popup_reserve, null)
 
         selected_price = binding.selectedPrice
         minimum_price_text = binding.necessary
         minimum_price = arguments?.getInt("query")
 
         binding.reserveSelect.setOnClickListener(this)
+        binding.reserveNoti.setOnClickListener(this)
 
-        if(minimum_price!! > 1000){
+        if(minimum_price!! >= 1000){
             if((minimum_price!! % 1000) == 0){
                 minimum_price_text.text = (minimum_price!! / 1000).toString() + ",000원"
             }
@@ -110,12 +114,48 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
                 } else {
                     selected_price.setTextColor(Color.GREEN)
                 }
-                selected_price.text = num.toString() + "원"
+
+                if(num >= 1000) {
+                    if(num % 1000 == 0) {
+                        selected_price.text = (num / 1000).toString() + ",000원"
+                    }
+                    else{
+                        selected_price.text = (num / 1000).toString() + "," + (num % 1000).toString() + "원"
+                    }
+                }
+                else{
+                    selected_price.text = num.toString() + "원"
+                }
                 binding.selectedMenus.adapter = SelectmenuAdapter(selected_menus, numbers)
             }
+
             R.id.reserve_noti -> {
-                Log.d("tag", "notify")
+                if(num < minimum_price!!){
+                    Toast.makeText(getActivity(), "최소 금액을 만족하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    showSettingPopup()
+                }
             }
         }
+    }
+
+    fun showSettingPopup() {
+        val alertDialog = AlertDialog.Builder(activity).create()
+
+        val btnOk = dialog.findViewById<android.widget.Button>(R.id.btn_ok)
+        btnOk.setOnClickListener {
+            Toast.makeText(getActivity(), "예약이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            alertDialog.dismiss()
+            requireActivity().finish()
+        }
+
+        val btnNo = dialog.findViewById<android.widget.Button>(R.id.btn_no)
+        btnNo.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.setView(dialog)
+        alertDialog.show()
     }
 }
