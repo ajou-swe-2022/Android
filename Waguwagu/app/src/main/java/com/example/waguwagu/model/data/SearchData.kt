@@ -18,7 +18,8 @@ data class SearchData(
     val restseatnum:Int,
     val email:String,
     val id:String,
-
+    @SerializedName("arriveTimeoutMinutes")
+    val reservetime: Int,
     val latitude:Double,
     val longitude:Double,
     @SerializedName("name")

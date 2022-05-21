@@ -84,10 +84,11 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
         return rootView;
 
     }
+    var map:GoogleMap?=null
     override fun onMapReady(googleMap: GoogleMap) {
         // 초기 지도가 생성될 때 작동되는 함수.
         // 주소:임시로 아주대학교
-
+        map=googleMap;
         //자기 위치 tag=0으로 표시
         googleMap.addMarker(
             MarkerOptions()
@@ -98,23 +99,13 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
         )?.tag=0
         //음식점 임시 주소 tag를 통해 객체를 지정할 수 있음
 
-        //var k=datas.size
-        for(j in 0..(5-1)) {
-            var temp=LatLng(37.282753,127.044999+(0.0006*(j+1)))
-            googleMap.addMarker(
-                MarkerOptions()
-                    .position(temp)
-                    .title("${0}")
-                    .snippet("${1}")
-                    .icon(bitmapDescriptorFromVector(mContext,R.drawable.marker_unclicked))
 
-            )?.tag=3;
-        }
         //지도 초기 확대.
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15.7f))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(ajou))
         googleMap.setOnMarkerClickListener (this)
         googleMap.setOnMapClickListener(this)
+        (activity as MainActivity).RestDataLoc(ajou.latitude,ajou.longitude,this@SearchmapFragment,4)
 
     }
 
@@ -154,6 +145,21 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
         prev_marker=null;
         binding.cardView.visibility = View.GONE
         return
+    }
+    fun recyledata(datas:List<SearchData>?) {
+        var k=datas?.size
+        if (k != null) {
+            for(j in 0..(k-1)) {
+                var temp=LatLng(37.282753,127.044999+(0.0006*(j+1)))
+                map?.addMarker(
+                    MarkerOptions()
+                        .position(temp)
+                        .title("${datas?.get(j)?.resttag}")
+                        .snippet("${datas?.get(j)?.restname}")
+                        .icon(bitmapDescriptorFromVector(mContext,R.drawable.marker_unclicked))
+                )?.tag= datas?.get(j);
+            }
+        }
     }
 
 

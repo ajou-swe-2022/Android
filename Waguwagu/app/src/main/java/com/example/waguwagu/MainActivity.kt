@@ -1,31 +1,24 @@
 package com.example.waguwagu
 
-import android.content.ContentValues.TAG
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.waguwagu.model.data.RestaurantsData
-import com.example.waguwagu.model.data.SearchData
 import com.example.waguwagu.model.data.UserData
 import com.example.waguwagu.ui.home.*
 import com.example.waguwagu.ui.mymenu.*
 import com.example.waguwagu.ui.orderlist.*
+import com.example.waguwagu.ui.reserve.ReservemenuFragment
 import com.example.waguwagu.ui.searchbar.*
 import com.example.waguwagu.ui.searchmap.*
-import com.google.android.gms.common.internal.service.Common.API
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-import retrofit2.http.GET
 
 
 class MainActivity : AppCompatActivity()  {
@@ -126,33 +119,42 @@ class MainActivity : AppCompatActivity()  {
 
     }
 
-    fun RestDataAll(): Response<RestaurantsData>? {
-        return  SendAPI(api.getRes("ALL",.1,.1,""))
+    fun RestDataAll(fragment: Fragment,id:Int)  {
+        SendAPI(api.getRes("ALL",.1,.1,""),fragment,id)
 
     }
-    fun RestDataLoc(latitude: Double,longitude:Double): Response<RestaurantsData>? {
-        return  SendAPI(api.getRes("LOCATION",latitude,longitude,""))
+    fun RestDataLoc(latitude: Double,longitude:Double,fragment: Fragment,id:Int)  {
+        SendAPI(api.getRes("LOCATION",latitude,longitude,""),fragment,id)
+
     }
-    fun RestDataName(Name:String): Response<RestaurantsData>? {
-        return SendAPI(api.getRes("NAME",.1,.1,Name))
+    fun RestDataName(Name:String,fragment: Fragment,id:Int) {
+        return SendAPI(api.getRes("NAME",.1,.1,Name),fragment,id)
     }
-    fun SendAPI(sendUrl:Call<RestaurantsData> ) :Response<RestaurantsData>?{
-        var returnData:Response<RestaurantsData>?=null;
+    fun SendAPI(sendUrl:Call<RestaurantsData>,fragment: Fragment,id:Int ){
+
         sendUrl.enqueue(object : Callback<RestaurantsData> {
-            override fun onResponse(
-                call: Call<RestaurantsData>,
-                response: Response<RestaurantsData>
-            ) {
-                Log.d(TAG, "성공 : ${response.raw()}")
-                Log.d(TAG, "성공 : ${response.body()}")
-                returnData=response
-
+            override fun onResponse(call: Call<RestaurantsData>, response: Response<RestaurantsData>) {
+                var senddata=response.body()?.restaurants
+                if(id==1) {
+                    (fragment as HomeFragment).recycledata(senddata)
+                }
+                else if(id==2) {
+                    (fragment as OrderlistFragment).recyledata(senddata)
+                }
+                else if(id==3) {
+                    (fragment as SearchbarFragment).recyledata(senddata)
+                }
+                else if(id==4) {
+                    (fragment as SearchmapFragment).recyledata(senddata)
+                }
+                Log.d("wy","Succeed : $senddata")
             }
             override fun onFailure(call: Call<RestaurantsData>, t: Throwable) {
-                Log.d(TAG, "실패 : $t")
+                Log.d("ch","Failed : $t")
             }
         })
-        return returnData;
+
+
     }
 
 

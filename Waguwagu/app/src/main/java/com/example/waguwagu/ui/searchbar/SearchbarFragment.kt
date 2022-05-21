@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.waguwagu.MainActivity
+import com.example.waguwagu.OrderlistAdapter
 import com.example.waguwagu.SearchAdapter
 import com.example.waguwagu.databinding.FragmentSearchbarBinding
 import com.example.waguwagu.model.data.SearchData
@@ -18,47 +20,37 @@ class SearchbarFragment : Fragment() {
     lateinit var binding : FragmentSearchbarBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
-        val binding = FragmentSearchbarBinding.inflate(inflater, container, false)
-        val datas = mutableListOf<SearchData>()
+        binding = FragmentSearchbarBinding.inflate(inflater, container, false)
+
         var searchkey = arguments?.getString("query")
-        val searched_data = mutableListOf<SearchData>()
 
-/*
-        datas.apply {
-            add(SearchData("McDonalds", "Hamburger", 3, 12, 30))
-            add(SearchData("롯데리아", "Hamburger", 3, 12, 30))
-            add(SearchData("본죽", "한식", 3, 12, 30))
-            add(SearchData("푸라닭", "한식", 3, 12, 30))
-            add(SearchData("팔달관매점", "호텔", 3, 12, 30))
-        }
-
-        for(data in datas){
-            if(searchkey == data.restname){
-                searched_data.apply { add(data) }
-            }
-            else if(searchkey == data.resttag){
-                searched_data.apply { add(data) }
-            }
-        }
 
         if(!searchkey.isNullOrBlank()) {
-            if (!searched_data.isEmpty()) {
-                binding.searchRecyclerview.adapter = SearchAdapter(searched_data)
-                binding.resultText.setVisibility(View.GONE)
-            } else {
-                binding.resultText.setVisibility(View.VISIBLE)
-                binding.resultText.text = "일치하는 음식점이 없습니다."
-            }
+            (activity as MainActivity).RestDataName(searchkey,this@SearchbarFragment,3)
         }
         else{
-            binding.searchRecyclerview.adapter = SearchAdapter(datas)
+           (activity as MainActivity).RestDataAll(this@SearchbarFragment,3)
         }
-        */
+
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+    fun recyledata(datas:List<SearchData>?) {
+        var searchkey = arguments?.getString("query")
+        if(!searchkey.isNullOrBlank()){
+        if (datas?.isEmpty()==true) {
+            binding.searchRecyclerview.adapter = SearchAdapter(datas)
+            binding.resultText.setVisibility(View.GONE)
+        } else {
+            binding.resultText.setVisibility(View.VISIBLE)
+            binding.resultText.text = "일치하는 음식점이 없습니다."
+        }
+    }
+        else binding.searchRecyclerview.adapter = datas?.let { SearchAdapter(it) };
+
     }
 
 }

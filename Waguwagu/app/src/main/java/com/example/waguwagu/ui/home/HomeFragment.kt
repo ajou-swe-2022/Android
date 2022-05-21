@@ -82,14 +82,13 @@ class HomeFragment : Fragment()  {
         binding.categoryRecyclerview2.adapter=CategoryAdapter(datas2,this@HomeFragment)
         binding.categoryRecyclerview3.adapter=CategoryAdapter(datas3,this@HomeFragment)
         binding.categoryRecyclerview4.adapter=CategoryAdapter(datas4,this@HomeFragment)
-        //binding.searchRecyclerview.adapter=SearchAdapter(datas)
+        (activity as MainActivity).RestDataAll(this@HomeFragment,1)
         return binding.root
     }
 
-
-
-
-
+    fun recycledata(datas:List<SearchData>?) {
+        binding.searchRecyclerview.adapter= datas?.let { SearchAdapter(it) }
+    }
 
 
 }
