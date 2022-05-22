@@ -15,6 +15,7 @@ import com.example.waguwagu.ui.reserve.ReservetableFragment
 class ReservationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation)
 

@@ -141,6 +141,7 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
 
     override fun onMapClick(latLng: LatLng) {
 
+
         prev_marker?.setIcon(bitmapDescriptorFromVector(mContext,R.drawable.marker_unclicked))
         prev_marker=null;
         binding.cardView.visibility = View.GONE
