@@ -26,7 +26,9 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
     val selected_menus = mutableListOf<MenuData>()
     val numbers = mutableListOf<String>()
     val datas = mutableListOf<MenuData>()
-    lateinit var dialog : View
+    var dialog : View? = null
+    lateinit var alertDialog : AlertDialog
+    lateinit var inflater: LayoutInflater
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,7 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
     ): View? {
         binding = FragmentReservemenuBinding.inflate(inflater, container, false)
         var link = getMenuSelected()
-        dialog = inflater.inflate(R.layout.popup_reserve, null)
+        this.inflater = inflater
 
         selected_price = binding.selectedPrice
         minimum_price_text = binding.necessary
@@ -134,6 +136,7 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(getActivity(), "최소 금액을 만족하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
                 else{
+                    dialog = inflater.inflate(R.layout.popup_reserve, null)
                     showSettingPopup()
                 }
             }
@@ -141,21 +144,22 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
     }
 
     fun showSettingPopup() {
-        val alertDialog = AlertDialog.Builder(activity).create()
+        alertDialog = AlertDialog.Builder(activity).create()
 
-        val btnOk = dialog.findViewById<android.widget.Button>(R.id.btn_ok)
+        val btnOk = dialog!!.findViewById<android.widget.Button>(R.id.btn_ok)
         btnOk.setOnClickListener {
             Toast.makeText(getActivity(), "예약이 완료되었습니다.", Toast.LENGTH_SHORT).show()
             alertDialog.dismiss()
             requireActivity().finish()
         }
 
-        val btnNo = dialog.findViewById<android.widget.Button>(R.id.btn_no)
+        val btnNo = dialog!!.findViewById<android.widget.Button>(R.id.btn_no)
         btnNo.setOnClickListener {
             alertDialog.dismiss()
         }
 
         alertDialog.setView(dialog)
+        alertDialog.setCanceledOnTouchOutside(true)
         alertDialog.show()
     }
 }
