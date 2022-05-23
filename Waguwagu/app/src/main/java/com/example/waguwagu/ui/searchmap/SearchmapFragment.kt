@@ -121,7 +121,7 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
             //tag에 담긴 data 통해 등장할 cardview내의 정보값을 변경
                 p0.setIcon(bitmapDescriptorFromVector(mContext,R.drawable.marker_clicked))
 
-            //binding.searchRecyclerview.adapter=SearchAdapter(mutableListOf<SearchData>(p0.tag as SearchData))
+            binding.searchRecyclerview.adapter=SearchAdapter(mutableListOf<SearchData>(p0.tag as SearchData))
             binding.cardView.visibility=View.VISIBLE
             prev_marker=p0
         };
@@ -141,19 +141,29 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
 
     override fun onMapClick(latLng: LatLng) {
 
+
         prev_marker?.setIcon(bitmapDescriptorFromVector(mContext,R.drawable.marker_unclicked))
         prev_marker=null;
         binding.cardView.visibility = View.GONE
         return
     }
     fun recyledata(datas:List<SearchData>?) {
+        map?.clear()
+
         var k=datas?.size
+        map?.addMarker(
+            MarkerOptions()
+                .position(ajou)
+                .title("내 위치")
+                .snippet("예시용 내위치")
+
+        )?.tag=0
         if (k != null) {
             for(j in 0..(k-1)) {
-                var temp=LatLng(37.282753,127.044999+(0.0006*(j+1)))
+
                 map?.addMarker(
                     MarkerOptions()
-                        .position(temp)
+                        .position(LatLng(datas?.get(j)?.latitude!!,datas?.get(j)?.longitude!!))
                         .title("${datas?.get(j)?.resttag}")
                         .snippet("${datas?.get(j)?.restname}")
                         .icon(bitmapDescriptorFromVector(mContext,R.drawable.marker_unclicked))

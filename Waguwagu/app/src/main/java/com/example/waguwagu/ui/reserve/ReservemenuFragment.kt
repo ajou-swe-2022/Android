@@ -151,6 +151,9 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
             Toast.makeText(getActivity(), "예약이 완료되었습니다.", Toast.LENGTH_SHORT).show()
             alertDialog.dismiss()
             requireActivity().finish()
+            (MainActivity.context_main as MainActivity).showReservation()
+
+
         }
 
         val btnNo = dialog!!.findViewById<android.widget.Button>(R.id.btn_no)

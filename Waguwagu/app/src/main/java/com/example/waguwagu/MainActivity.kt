@@ -1,9 +1,12 @@
 package com.example.waguwagu
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.waguwagu.model.data.RestaurantsData
 import com.example.waguwagu.model.data.UserData
@@ -29,21 +32,33 @@ class MainActivity : AppCompatActivity()  {
         .baseUrl(BASE_URL_API)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    val api = retrofit.create(restinterface::class.java)
+    val api = retrofit.create(resinterface::class.java)
+    companion object {
+        var context_main: Context?=null;
+    }
+
+
+
 
 
     val searchbarFragment = SearchbarFragment()
 
     val homeFragment = HomeFragment()
     var userdata: UserData?=null
-    var searchview:SearchView?=null
-
+    var  searchview:SearchView?=null
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
+
 
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         searchview = findViewById(R.id.search_view)
+        var mToolbar = findViewById(R.id.toolbar3) as Toolbar?
+        setSupportActionBar(mToolbar)
+        this.getSupportActionBar()!!.hide()
         //임시 유저 데이터
         userdata=UserData("뿡빵이","BungBang0123","wakwak0101","010-1010-1010","wakwak0101@gmail.com")
 
@@ -101,6 +116,7 @@ class MainActivity : AppCompatActivity()  {
             })
 
         }
+        context_main=this;
 
 
     }
@@ -121,9 +137,11 @@ class MainActivity : AppCompatActivity()  {
 
     fun RestDataAll(fragment: Fragment,id:Int)  {
         SendAPI(api.getRes("ALL",.1,.1,""),fragment,id)
+
     }
     fun RestDataLoc(latitude: Double,longitude:Double,fragment: Fragment,id:Int)  {
         SendAPI(api.getRes("LOCATION",latitude,longitude,""),fragment,id)
+
     }
     fun RestDataName(Name:String,fragment: Fragment,id:Int) {
         return SendAPI(api.getRes("NAME",.1,.1,Name),fragment,id)
@@ -154,6 +172,11 @@ class MainActivity : AppCompatActivity()  {
 
 
     }
+    fun showReservation() {
+        this.supportActionBar!!.show()
+    }
+
+
 
 
 
