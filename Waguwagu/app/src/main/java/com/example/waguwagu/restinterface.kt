@@ -7,7 +7,7 @@ import retrofit2.http.Query;
 import com.example.waguwagu.model.data.SearchData;
 import retrofit2.http.Header
 
-interface restinterface {
+interface resinterface {
 
 
     @GET("restaurants")

@@ -21,7 +21,7 @@ class ReservationActivity : AppCompatActivity() {
         .baseUrl(BASE_URL_API)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    val api = retrofit.create(restinterface::class.java)
+    val api = retrofit.create(resinterface::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
