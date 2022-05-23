@@ -15,6 +15,7 @@ import android.widget.Toast
 import com.example.waguwagu.*
 import com.example.waguwagu.databinding.FragmentReservemenuBinding
 import com.example.waguwagu.model.data.MenuData
+import com.example.waguwagu.model.data.MenusData
 
 class ReservemenuFragment : Fragment(), View.OnClickListener {
 
@@ -29,6 +30,7 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
     var dialog : View? = null
     lateinit var alertDialog : AlertDialog
     lateinit var inflater: LayoutInflater
+    val link = getMenuSelected()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,6 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentReservemenuBinding.inflate(inflater, container, false)
-        var link = getMenuSelected()
         this.inflater = inflater
 
         selected_price = binding.selectedPrice
@@ -65,13 +66,12 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
         selected_price.text = "0원"
 
         datas.apply {
-            add(MenuData("1", "빅맥", 3500))
-            add(MenuData("1", "불고기버거", 2000))
-            add(MenuData("1", "슈비버거", 4000))
-            add(MenuData("1", "상하이스파이스버거", 4500))
+            add(MenuData(1, "빅맥", 3500, 1))
+            add(MenuData(2, "불고기버거", 2000, 1))
+            add(MenuData(3, "슈비버거", 4000, 1))
+            add(MenuData(4, "상하이스파이스버거", 4500, 1))
         }
 
-        binding.menuRecyclerview.adapter = MenuAdapter(datas, link)
         return binding.root
     }
 
@@ -161,5 +161,9 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
         alertDialog.setView(dialog)
         alertDialog.setCanceledOnTouchOutside(true)
         alertDialog.show()
+    }
+
+    fun menurecycle(data: MenusData){
+        binding.menuRecyclerview.adapter = MenuAdapter(datas, link)
     }
 }

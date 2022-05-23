@@ -29,14 +29,14 @@ class MainActivity : AppCompatActivity()  {
         .baseUrl(BASE_URL_API)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    val api = retrofit.create(resinterface::class.java)
+    val api = retrofit.create(restinterface::class.java)
 
 
     val searchbarFragment = SearchbarFragment()
 
     val homeFragment = HomeFragment()
     var userdata: UserData?=null
-    var  searchview:SearchView?=null
+    var searchview:SearchView?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -121,11 +121,9 @@ class MainActivity : AppCompatActivity()  {
 
     fun RestDataAll(fragment: Fragment,id:Int)  {
         SendAPI(api.getRes("ALL",.1,.1,""),fragment,id)
-
     }
     fun RestDataLoc(latitude: Double,longitude:Double,fragment: Fragment,id:Int)  {
         SendAPI(api.getRes("LOCATION",latitude,longitude,""),fragment,id)
-
     }
     fun RestDataName(Name:String,fragment: Fragment,id:Int) {
         return SendAPI(api.getRes("NAME",.1,.1,Name),fragment,id)

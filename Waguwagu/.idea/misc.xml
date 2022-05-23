@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.121" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/component_round.xml" value="0.1" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/ic_mymenu.xml" value="0.1" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/ic_searchmap.xml" value="0.121" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_board.xml" value="0.21920289855072464" />
