@@ -17,8 +17,8 @@ class TableAdapter (val data:List<TableData>) : RecyclerView.Adapter<TableAdapte
     inner class TableViewHolder(private val binding : ReserveTableBinding) : RecyclerView.ViewHolder(binding.root){
         @SuppressLint("ResourceAsColor")
         fun bind(tableData: TableData){
-                binding.seatNum.text = tableData.table_num
-                binding.tableId.text = tableData.table_id + "번 테이블"
+                binding.seatNum.text = tableData.seat_num.toString() + "인"
+                binding.tableId.text = tableData.table_name
 
                 if(tableData.table_access){
                     binding.button.text = "예약"
@@ -55,6 +55,7 @@ class TableAdapter (val data:List<TableData>) : RecyclerView.Adapter<TableAdapte
             if(data[position].table_access) {
                 val intent = Intent(holder.itemView?.context, ReservenotiActivity::class.java)
                 intent.putExtra("table_id", data[position].table_id)
+                intent.putExtra("table_name", data[position].table_name)
                 intent.putExtra("minimum_price", data[position].minimum_price)
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
             }

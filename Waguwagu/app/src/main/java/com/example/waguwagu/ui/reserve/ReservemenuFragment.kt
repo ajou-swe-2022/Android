@@ -15,9 +15,23 @@ import android.widget.Toast
 import com.example.waguwagu.*
 import com.example.waguwagu.databinding.FragmentReservemenuBinding
 import com.example.waguwagu.model.data.MenuData
-import com.example.waguwagu.model.data.MenusData
+import com.example.waguwagu.model.data.Postresult
+import com.example.waguwagu.model.data.ReserveData
+import com.example.waguwagu.model.data.orders
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ReservemenuFragment : Fragment(), View.OnClickListener {
+
+    val BASE_URL_API = "https://diunbu3dmy.ap-northeast-1.awsapprunner.com:443/api/v1/"
+    val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL_API)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    val api = retrofit.create(menuinterface::class.java)
 
     lateinit var binding: FragmentReservemenuBinding
     var num : Int = 0
@@ -31,6 +45,8 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
     lateinit var alertDialog : AlertDialog
     lateinit var inflater: LayoutInflater
     val link = getMenuSelected()
+    val send_number = mutableListOf<Int>()
+    var resID : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +62,8 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
         selected_price = binding.selectedPrice
         minimum_price_text = binding.necessary
         minimum_price = arguments?.getInt("query")
+
+
 
         binding.reserveSelect.setOnClickListener(this)
         binding.reserveNoti.setOnClickListener(this)
@@ -66,12 +84,12 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
         selected_price.text = "0원"
 
         datas.apply {
-            add(MenuData(1, "빅맥", 3500, 1))
-            add(MenuData(2, "불고기버거", 2000, 1))
-            add(MenuData(3, "슈비버거", 4000, 1))
-            add(MenuData(4, "상하이스파이스버거", 4500, 1))
+            add(MenuData(1, "빅맥", 3500, "401-234"))
+            add(MenuData(2, "불고기버거", 2000, "401-234"))
+            add(MenuData(3, "슈비버거", 4000, "401-234"))
+            add(MenuData(4, "상하이스파이스버거", 4500, "401-234"))
         }
-
+        //binding.menuRecyclerview.adapter = MenuAdapter(datas, link)
         return binding.root
     }
 
@@ -91,17 +109,21 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
                 if(number == 0){ // 줄어서 0개가 되면 리스트에서 삭제
                     selected_menus.removeAt(index)
                     numbers.removeAt(index)
+                    send_number.removeAt(index)
                 }
                 else // 0개가 아니라면 그대로 갯수만 수정
                     numbers[index] = number.toString() + "개"
+                    send_number[index] = number
             }
             else{ // plus menu
                 if(index != -1){ // 리스트에 존재한다면 갯수만 수정
                     numbers[index] = number.toString() + "개"
+                    send_number[index] = number
                 }
                 else{ // 존재하지 않는다면 리스트에 추가
                     selected_menus.add(data)
                     numbers.add("1개")
+                    send_number.add(1)
                 }
             }
         }
@@ -148,12 +170,24 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
 
         val btnOk = dialog!!.findViewById<android.widget.Button>(R.id.btn_ok)
         btnOk.setOnClickListener {
-            Toast.makeText(getActivity(), "예약이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-            alertDialog.dismiss()
-            requireActivity().finish()
-            (MainActivity.context_main as MainActivity).showReservation()
+            val reserve_menus = mutableListOf<orders>()
+            for(index in 0 until selected_menus.size){
+                reserve_menus.add(orders(selected_menus[index].menuid, send_number[index]))
+            }
 
+            api.postReserve(reserve_menus, resID!!, 1).enqueue(object : Callback<Postresult>{
+                override fun onFailure(call: Call<Postresult>, t: Throwable) {
+                    Log.e("error", "error : $t")
+                }
 
+                override fun onResponse(call: Call<Postresult>, response: Response<Postresult>) {
+                    Log.d("test", "Success : ${response.body().toString()}")
+                    Toast.makeText(getActivity(), "예약이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    alertDialog.dismiss()
+                    requireActivity().finish()
+                    (MainActivity.context_main as MainActivity).showReservation()
+                }
+            })
         }
 
         val btnNo = dialog!!.findViewById<android.widget.Button>(R.id.btn_no)
@@ -166,7 +200,11 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
         alertDialog.show()
     }
 
-    fun menurecycle(data: MenusData){
-        binding.menuRecyclerview.adapter = MenuAdapter(datas, link)
+    fun menurecycle(data: List<MenuData>){
+        binding.menuRecyclerview.adapter = MenuAdapter(data, link)
+    }
+
+    fun getResID(resID : String){
+        this.resID = resID
     }
 }

@@ -1,7 +1,7 @@
 package com.example.waguwagu.model.data
 
 import com.google.gson.annotations.SerializedName
-data class MenusData(val menus:List<MenuData>)
+data class MenusData(val items:List<MenuData>)
 
 data class MenuData(
     @SerializedName("id")
@@ -14,7 +14,7 @@ data class MenuData(
     val menuprice : Int,
 
     @SerializedName("restaurantID")
-    val resID : Int
+    val resID : String
     )
 
 /*

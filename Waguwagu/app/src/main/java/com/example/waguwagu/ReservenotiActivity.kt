@@ -2,12 +2,17 @@ package com.example.waguwagu
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.waguwagu.model.data.MenuData
+import com.example.waguwagu.model.data.MenusData
 import com.example.waguwagu.ui.reserve.ReservemenuFragment
-import com.example.waguwagu.ui.reserve.ReservetableFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -19,6 +24,7 @@ class ReservenotiActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     val api = retrofit.create(menuinterface::class.java)
+    val call = api.getMenu("401-234")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +36,25 @@ class ReservenotiActivity : AppCompatActivity() {
         ab.setDisplayShowTitleEnabled(false)
         ab.setDisplayHomeAsUpEnabled(true)
 
-        val table_id = intent.getStringExtra("table_id")
+        val table_id = intent.getStringExtra("table_name")
         val table_name = findViewById<TextView>(R.id.table_name)
-        table_name.text = table_id + "번 테이블"
+        table_name.text = table_id
 
         val reservemenuFragment = ReservemenuFragment()
+        var menus : List<MenuData>? = null
+        call.enqueue(object : Callback<MenusData> {
+            override fun onResponse(call: Call<MenusData>, response: Response<MenusData>) {
+                menus = response.body()?.items
+                reservemenuFragment.menurecycle(menus!!)
+                reservemenuFragment.getResID(menus!![0].resID)
+                Log.d("wy","Succeed : $menus")
+            }
+
+            override fun onFailure(call: Call<MenusData>, t: Throwable) {
+                Log.e("error", "error :${t.message}")
+            }
+
+        })
         supportFragmentManager.beginTransaction().replace(R.id.fl_container, reservemenuFragment).commit()
         setDataAtFragment(reservemenuFragment, intent.getIntExtra("minimum_price", 0))
     }
@@ -53,7 +73,7 @@ class ReservenotiActivity : AppCompatActivity() {
     fun setDataAtFragment(fragment: Fragment, price: Int){
         val bundle = Bundle()
         bundle.putInt("query", price)
-
         fragment.arguments = bundle
     }
+
 }

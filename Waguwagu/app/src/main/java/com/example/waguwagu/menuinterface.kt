@@ -1,17 +1,23 @@
 package com.example.waguwagu
 
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
 import com.example.waguwagu.model.data.MenusData
+import com.example.waguwagu.model.data.Postresult
+import com.example.waguwagu.model.data.orders
+import retrofit2.http.*
 
 interface menuinterface {
 
-    @GET("items")
+    @GET("restaurant/{id}/menu")
     fun getMenu(
-        @Query("id") id:Int,
-        @Query("name") name:String,
-        @Query("price") price:Int,
-        @Query("restaurantID") resID:String
+        @Path("id") restaurantID : String
     ) : Call<MenusData>
+
+    @FormUrlEncoded
+    @POST("reservations")
+    fun postReserve(
+        @Field("orders") orders : List<orders>,
+        @Field("restaurantID") resID : String,
+        @Field("userID") userID : Int
+    ) : Call<Postresult>
 }

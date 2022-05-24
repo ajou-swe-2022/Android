@@ -33,15 +33,17 @@ class ReservetableFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentReservetableBinding.inflate(inflater, container, false)
+        binding = FragmentReservetableBinding.inflate(inflater, container, false)
         val datas = mutableListOf<TableData>()
         var string_name_time = arguments?.getStringArray("query")
-
+/*
         datas.apply {
             add(TableData("@drawable/seat_example.png", "4인", true, "1", 12500))
             add(TableData("@drawable/seat_example.png", "1인", false, "2", 6000))
             add(TableData("@drawable/seat_example.png", "4인", true, "3", 8000))
         }
+
+ */
 
         binding.seatImg.setOnClickListener {
             var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.naver.com"))
@@ -52,8 +54,11 @@ class ReservetableFragment : Fragment() {
             binding.restNameWrap.text = string_name_time[0]
             binding.reserveTime.text = string_name_time[1] + "분 이내 방문"
         }
-        binding.tableRecyclerview.adapter = TableAdapter(datas)
 
         return binding.root
+    }
+
+    fun tablerecycle(datas : List<TableData>){
+        binding.tableRecyclerview.adapter = TableAdapter(datas)
     }
 }
