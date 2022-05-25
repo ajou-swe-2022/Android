@@ -14,10 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.waguwagu.*
 import com.example.waguwagu.databinding.FragmentReservemenuBinding
-import com.example.waguwagu.model.data.MenuData
-import com.example.waguwagu.model.data.Postresult
-import com.example.waguwagu.model.data.ReserveData
-import com.example.waguwagu.model.data.orders
+import com.example.waguwagu.model.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -82,7 +79,7 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
 
         selected_price.setTextColor(Color.RED)
         selected_price.text = "0원"
-
+/*
         datas.apply {
             add(MenuData(1, "빅맥", 3500, "401-234"))
             add(MenuData(2, "불고기버거", 2000, "401-234"))
@@ -90,6 +87,8 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
             add(MenuData(4, "상하이스파이스버거", 4500, "401-234"))
         }
         //binding.menuRecyclerview.adapter = MenuAdapter(datas, link)
+
+ */
         return binding.root
     }
 
@@ -174,18 +173,24 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
             for(index in 0 until selected_menus.size){
                 reserve_menus.add(orders(selected_menus[index].menuid, send_number[index]))
             }
+            Log.d("test", reserve_menus.toString())
 
-            api.postReserve(reserve_menus, resID!!, 1).enqueue(object : Callback<Postresult>{
-                override fun onFailure(call: Call<Postresult>, t: Throwable) {
-                    Log.e("error", "error : $t")
-                }
+            val input = HashMap<String, Any>()
+            input.put("orders", reserve_menus)
+            input.put("restaurantID", resID!!)
+            input.put("userID", 0)
 
-                override fun onResponse(call: Call<Postresult>, response: Response<Postresult>) {
-                    Log.d("test", "Success : ${response.body().toString()}")
+            api.postReserve(input).enqueue(object : Callback<Void>{
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Log.d("test", "Success : ${response.isSuccessful}")
                     Toast.makeText(getActivity(), "예약이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                     alertDialog.dismiss()
                     requireActivity().finish()
                     (MainActivity.context_main as MainActivity).showReservation()
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("error", "error : $t")
                 }
             })
         }
