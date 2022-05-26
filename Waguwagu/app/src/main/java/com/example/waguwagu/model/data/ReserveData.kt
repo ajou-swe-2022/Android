@@ -20,7 +20,3 @@ data class orders(
     @SerializedName("quantity")
     val quantity : Int
 )
-
-
-
-data class Postresult(val result : String)
