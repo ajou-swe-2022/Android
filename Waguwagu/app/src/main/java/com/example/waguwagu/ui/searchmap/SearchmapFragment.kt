@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Log
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -66,21 +67,21 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /*
-        datas.apply {
-            add(SearchData("McDonalds", "Hamburger", 3, 12, 30))
-            add(SearchData("롯데리아", "Hamburger", 3, 12, 30))
-            add(SearchData("본죽", "한식", 3, 12, 30))
-            add(SearchData("푸라닭", "한식", 3, 12, 30))
-            add(SearchData("팔달관매점", "호텔", 3, 12, 30))
-        } */
+
         binding=FragmentSearchmapBinding.inflate(inflater,container,false)
 
 
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.getMapAsync(this)
         rootView=binding.getRoot()
-        System.out.println(datas)
+        var searchkey = arguments?.getString("query")
+
+        search(searchkey)
+
+
+
+
+
         return rootView;
 
     }
@@ -98,6 +99,8 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
 
         )?.tag=0
         //음식점 임시 주소 tag를 통해 객체를 지정할 수 있음
+        var searchkey = arguments?.getString("query")
+
 
 
         //지도 초기 확대.
@@ -105,7 +108,9 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(ajou))
         googleMap.setOnMarkerClickListener (this)
         googleMap.setOnMapClickListener(this)
-        (activity as MainActivity).RestDataLoc(ajou.latitude,ajou.longitude,this@SearchmapFragment,4)
+
+
+        //(activity as MainActivity).RestDataLoc(ajou.latitude,ajou.longitude,this@SearchmapFragment,4)
 
     }
 
@@ -170,6 +175,15 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
                 )?.tag= datas?.get(j);
             }
         }
+    }
+    fun search(searchkey:String?) {
+        if(!searchkey.isNullOrBlank()) {
+            (activity as MainActivity).RestDataName(searchkey,this@SearchmapFragment,4)
+        }
+        else{
+            (activity as MainActivity).RestDataLoc(ajou.latitude,ajou.longitude,this@SearchmapFragment,4)
+        }
+
     }
 
 

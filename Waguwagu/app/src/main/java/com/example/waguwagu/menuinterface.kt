@@ -2,7 +2,7 @@ package com.example.waguwagu
 
 import retrofit2.Call
 import com.example.waguwagu.model.data.MenusData
-import com.example.waguwagu.model.data.Postresult
+//import com.example.waguwagu.model.data.Postresult
 import com.example.waguwagu.model.data.ReserveData
 import com.example.waguwagu.model.data.orders
 import okhttp3.MultipartBody

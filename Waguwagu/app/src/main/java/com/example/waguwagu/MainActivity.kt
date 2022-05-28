@@ -4,9 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.waguwagu.model.data.RestaurantsData
 import com.example.waguwagu.model.data.UserData
@@ -16,12 +19,16 @@ import com.example.waguwagu.ui.orderlist.*
 import com.example.waguwagu.ui.reserve.ReservemenuFragment
 import com.example.waguwagu.ui.searchbar.*
 import com.example.waguwagu.ui.searchmap.*
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.concurrent.timer
 
 
 class MainActivity : AppCompatActivity()  {
@@ -40,8 +47,9 @@ class MainActivity : AppCompatActivity()  {
 
 
 
-
+    var timertask : Timer?=null
     val searchbarFragment = SearchbarFragment()
+    val searchMapFragment=SearchmapFragment()
 
     val homeFragment = HomeFragment()
     var userdata: UserData?=null
@@ -56,9 +64,9 @@ class MainActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         searchview = findViewById(R.id.search_view)
-        var mToolbar = findViewById(R.id.toolbar3) as Toolbar?
-        setSupportActionBar(mToolbar)
-        this.getSupportActionBar()!!.hide()
+        var mToolbar = findViewById(R.id.toolBar) as Toolbar
+        mToolbar.setVisibility(View.GONE)
+
         //임시 유저 데이터
         userdata=UserData("뿡빵이","BungBang0123","wakwak0101","010-1010-1010","wakwak0101@gmail.com")
 
@@ -97,15 +105,29 @@ class MainActivity : AppCompatActivity()  {
 
             searchview?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    setDataAtFragment(searchbarFragment, query)
-                    if(selectedItemId != R.id.searchbar) {
-                        supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchbarFragment).commit()
-                        selectedItemId = R.id.searchbar
+
+                    if(R.id.searchmap==selectedItemId) {
+                        setDataAtFragment(searchMapFragment, query)
+                        supportFragmentManager.beginTransaction().replace(R.id.fl_container, searchMapFragment).commit()
+
+
                     }
                     else {
-                        supportFragmentManager.beginTransaction().detach(searchbarFragment).commitNowAllowingStateLoss()
-                        supportFragmentManager.beginTransaction().attach(searchbarFragment).commitAllowingStateLoss()
+                        setDataAtFragment(searchbarFragment, query)
+
+                        if (selectedItemId != R.id.searchbar) {
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.fl_container, searchbarFragment).commit()
+                            selectedItemId = R.id.searchbar
+
+                        } else {
+                            supportFragmentManager.beginTransaction().detach(searchbarFragment)
+                                .commitNowAllowingStateLoss()
+                            supportFragmentManager.beginTransaction().attach(searchbarFragment)
+                                .commitAllowingStateLoss()
+                        }
                     }
+
                     searchview?.clearFocus()
                     return false
                 }
@@ -150,6 +172,7 @@ class MainActivity : AppCompatActivity()  {
 
         sendUrl.enqueue(object : Callback<RestaurantsData> {
             override fun onResponse(call: Call<RestaurantsData>, response: Response<RestaurantsData>) {
+
                 var senddata=response.body()?.restaurants
                 if(id==1) {
                     (fragment as HomeFragment).recycledata(senddata)
@@ -173,8 +196,26 @@ class MainActivity : AppCompatActivity()  {
 
     }
     fun showReservation() {
-        this.supportActionBar!!.show()
+        var mToolbar = findViewById(R.id.toolBar) as Toolbar
+        var timebar=findViewById(R.id.result_text) as TextView
+       mToolbar.setVisibility(View.VISIBLE)
+        var x=30
+     timertask=kotlin.concurrent.timer(period = 60000) {	// timer() 호출
+              x--
+
+            // UI조작을 위한 메서드
+            runOnUiThread {
+                if(x==0) {
+                    timebar.text="예약 방문 시간이 만료되었습니다"
+
+                    timertask?.cancel()
+                }
+                else timebar.text="예약 방문 시간 ${x}분 남았습니다"
+
+            }
+        }
     }
+
 
 
 

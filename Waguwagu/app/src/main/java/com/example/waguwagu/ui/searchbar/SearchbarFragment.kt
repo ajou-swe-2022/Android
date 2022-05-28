@@ -39,17 +39,15 @@ class SearchbarFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
     fun recyledata(datas:List<SearchData>?) {
-        var searchkey = arguments?.getString("query")
-        if(!searchkey.isNullOrBlank()){
+
+
         if (datas?.isEmpty()==true) {
-            binding.searchRecyclerview.adapter = SearchAdapter(datas)
-            binding.resultText.setVisibility(View.GONE)
-        } else {
             binding.resultText.setVisibility(View.VISIBLE)
             binding.resultText.text = "일치하는 음식점이 없습니다."
+        } else {
+            binding.searchRecyclerview.adapter = datas?.let { SearchAdapter(it) }
+            binding.resultText.setVisibility(View.GONE)
         }
-    }
-        else binding.searchRecyclerview.adapter = datas?.let { SearchAdapter(it) };
 
     }
 
