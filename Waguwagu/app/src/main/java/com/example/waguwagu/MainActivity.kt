@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity()  {
 
 
     }
-    fun showReservation() {
+    fun showReservation(restname:String) {
         var mToolbar = findViewById(R.id.toolBar) as Toolbar
         var timebar=findViewById(R.id.result_text) as TextView
        mToolbar.setVisibility(View.VISIBLE)
@@ -210,7 +210,7 @@ class MainActivity : AppCompatActivity()  {
 
                     timertask?.cancel()
                 }
-                else timebar.text="{음식점 이름} 예약 방문 시간 ${x}분 남았습니다"
+                else timebar.text="${restname} 예약 방문 시간 ${x}분 남았습니다"
 
             }
         }
