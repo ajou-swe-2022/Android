@@ -199,7 +199,7 @@ class MainActivity : AppCompatActivity()  {
         var mToolbar = findViewById(R.id.toolBar) as Toolbar
         var timebar=findViewById(R.id.result_text) as TextView
        mToolbar.setVisibility(View.VISIBLE)
-        var x=30
+        var x=31
      timertask=kotlin.concurrent.timer(period = 60000) {	// timer() 호출
               x--
 
@@ -210,7 +210,7 @@ class MainActivity : AppCompatActivity()  {
 
                     timertask?.cancel()
                 }
-                else timebar.text="예약 방문 시간 ${x}분 남았습니다"
+                else timebar.text="{음식점 이름} 예약 방문 시간 ${x}분 남았습니다"
 
             }
         }
