@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.waguwagu.model.data.RestaurantsData
 import com.example.waguwagu.model.data.UserData
+import com.example.waguwagu.model.data.reservecheckData
 import com.example.waguwagu.ui.home.*
 import com.example.waguwagu.ui.mymenu.*
 import com.example.waguwagu.ui.orderlist.*
@@ -43,11 +44,10 @@ class MainActivity : AppCompatActivity()  {
     companion object {
         var context_main: Context?=null;
     }
+    val rescheckapi=retrofit.create(reservecheckInterface::class.java)
 
-
-
-
-    var timertask : Timer?=null
+    var checktime : Timer?=null
+    var checkans : Timer?=null
     val searchbarFragment = SearchbarFragment()
     val searchMapFragment=SearchmapFragment()
 
@@ -195,27 +195,57 @@ class MainActivity : AppCompatActivity()  {
 
 
     }
-    fun showReservation(restname:String) {
+    fun showReservation(restId:String,userId:Int) {
         var mToolbar = findViewById(R.id.toolBar) as Toolbar
         var timebar=findViewById(R.id.result_text) as TextView
        mToolbar.setVisibility(View.VISIBLE)
-        var x=31
-     timertask=kotlin.concurrent.timer(period = 60000) {	// timer() 호출
-              x--
 
-            // UI조작을 위한 메서드
+        timebar.text="${restId} 예약 요청 확인 중 잠시만 기다려주세요"
+
+        checkans=timer(period = 10000) {
+
+            sendReservecheck(userId,restId)
+        }
+    }
+    fun sendReservecheck(userId:Int,restId:String) {
+        rescheckapi.getReserv(userId).enqueue(object : Callback<reservecheckData> {
+            override fun onResponse(call: Call<reservecheckData>, response: Response<reservecheckData>) {
+
+                var senddata=response.body()?.reservations
+                if (senddata != null) {
+                    for(x in senddata) {
+                        if(x.restaurantID==restId&&x.status=="approved") {
+                            checkans?.cancel()
+                            checktime(restId)
+                        }
+
+                    }
+                }
+                Log.d("wy","Succeed : $senddata")
+            }
+            override fun onFailure(call: Call<reservecheckData>, t: Throwable) {
+                Log.d("ch","Failed : $t")
+            }
+        })
+
+    }
+    fun checktime(restId: String) {
+        var x=31
+        var timebar=findViewById(R.id.result_text) as TextView
+        checktime=timer(period = 60000) {
+            x--// timer() 호출
             runOnUiThread {
                 if(x==0) {
                     timebar.text="예약 방문 시간이 만료되었습니다"
 
-                    timertask?.cancel()
+                    checktime?.cancel()
                 }
-                else timebar.text="${restname} 예약 방문 시간 ${x}분 남았습니다"
+                else timebar.text="${restId} 예약 방문 시간 ${x}분 남았습니다"
 
             }
         }
-    }
 
+    }
 
 
 

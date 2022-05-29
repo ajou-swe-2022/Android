@@ -186,7 +186,7 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(getActivity(), "예약이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                     alertDialog.dismiss()
                     requireActivity().finish()
-                    (MainActivity.context_main as MainActivity).showReservation("미스터 쉐프")
+                    (MainActivity.context_main as MainActivity).showReservation(resID!!,0)
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
