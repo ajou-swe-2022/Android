@@ -20,10 +20,8 @@ data class reservation(
 )
 
 data class order(
-    @SerializedName("menuID")
     val menuID : Int,
     val menuName: String,
     val price: Int,
-    @SerializedName("quantity")
     val quantity : Int
 )

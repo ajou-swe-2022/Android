@@ -8,8 +8,8 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface reservecheckInterface {
-    @GET("users/{id}/reservation")
+    @GET("users/{id}/reservations")
     fun getReserv(
-        @Path("id") UserID : Int
+        @Path("id") UserID : String
     ) : Call<reservecheckData>
 }

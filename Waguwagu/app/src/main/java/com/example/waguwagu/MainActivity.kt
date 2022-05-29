@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.example.waguwagu.model.data.RestData
 import com.example.waguwagu.model.data.RestaurantsData
 import com.example.waguwagu.model.data.UserData
 import com.example.waguwagu.model.data.reservecheckData
@@ -197,37 +198,53 @@ class MainActivity : AppCompatActivity()  {
     }
     fun showReservation(restId:String,userId:Int) {
         var mToolbar = findViewById(R.id.toolBar) as Toolbar
-        var timebar=findViewById(R.id.result_text) as TextView
+
        mToolbar.setVisibility(View.VISIBLE)
 
-        timebar.text="${restId} 예약 요청 확인 중 잠시만 기다려주세요"
 
+        checkrestname(userId,restId)
+
+    }
+    fun checkrestname(userId:Int,restId:String) {
+        api.getRestname(restId).enqueue(object:Callback<RestData> {
+            override fun onResponse(call: Call<RestData>, response: Response<RestData>) {
+
+                var senddata=response.body()?.name
+                if (senddata != null) {
+                    checkreserv(userId,senddata,restId)
+                }
+                Log.d("wy","Succeed : $senddata")
+            }
+            override fun onFailure(call: Call<RestData>, t: Throwable) {
+                Log.d("ch","Failed : $t")
+            }
+        })
+    }
+    fun checkreserv(userId: Int,restName: String,restId:String) {
+        var timebar=findViewById(R.id.result_text) as TextView
+        timebar.text="${restName} 예약 요청 확인 중 잠시만 기다려주세요"
         checkans=timer(period = 10000) {
-
             sendReservecheck(userId,restId)
         }
     }
     fun sendReservecheck(userId:Int,restId:String) {
-        rescheckapi.getReserv(userId).enqueue(object : Callback<reservecheckData> {
+        Log.d("wy","$userId")
+        rescheckapi.getReserv(userId.toString()).enqueue(object : Callback<reservecheckData> {
             override fun onResponse(call: Call<reservecheckData>, response: Response<reservecheckData>) {
-
                 var senddata=response.body()?.reservations
-                if (senddata != null) {
-                    for(x in senddata) {
-                        if(x.restaurantID==restId&&x.status=="approved") {
-                            checkans?.cancel()
-                            checktime(restId)
+                    if (senddata != null) {
+                        for(x in senddata) {
+                            if(x.restaurantID==restId&&x.status=="approved") {
+                                checkans?.cancel()
+                                checktime(restId)
+                            }
                         }
-
                     }
-                }
-                Log.d("wy","Succeed : $senddata")
             }
             override fun onFailure(call: Call<reservecheckData>, t: Throwable) {
                 Log.d("ch","Failed : $t")
             }
         })
-
     }
     fun checktime(restId: String) {
         var x=31
