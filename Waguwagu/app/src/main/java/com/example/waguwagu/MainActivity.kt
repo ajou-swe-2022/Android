@@ -210,8 +210,9 @@ class MainActivity : AppCompatActivity()  {
             override fun onResponse(call: Call<RestData>, response: Response<RestData>) {
 
                 var senddata=response.body()?.name
+                var sendtime=response.body()?.arriveTimeoutMinutes
                 if (senddata != null) {
-                    checkreserv(userId,senddata,restId)
+                    checkreserv(userId,senddata,restId,sendtime)
                 }
                 Log.d("wy","Succeed : $senddata")
             }
@@ -220,14 +221,14 @@ class MainActivity : AppCompatActivity()  {
             }
         })
     }
-    fun checkreserv(userId: Int,restName: String,restId:String) {
+    fun checkreserv(userId: Int,restName: String,restId:String,sendTime:Int?) {
         var timebar=findViewById(R.id.result_text) as TextView
         timebar.text="${restName} 예약 요청 확인 중 잠시만 기다려주세요"
         checkans=timer(period = 10000) {
-            sendReservecheck(userId,restId)
+            sendReservecheck(userId,restId,sendTime)
         }
     }
-    fun sendReservecheck(userId:Int,restId:String) {
+    fun sendReservecheck(userId:Int,restId:String,sendTime: Int?) {
         Log.d("wy","$userId")
         rescheckapi.getReserv(userId.toString()).enqueue(object : Callback<reservecheckData> {
             override fun onResponse(call: Call<reservecheckData>, response: Response<reservecheckData>) {
@@ -236,7 +237,7 @@ class MainActivity : AppCompatActivity()  {
                         for(x in senddata) {
                             if(x.restaurantID==restId&&x.status=="approved") {
                                 checkans?.cancel()
-                                checktime(restId)
+                                checktime(restId,sendTime)
                             }
                         }
                     }
@@ -246,8 +247,8 @@ class MainActivity : AppCompatActivity()  {
             }
         })
     }
-    fun checktime(restId: String) {
-        var x=31
+    fun checktime(restId: String,sendTime: Int?) {
+        var x=sendTime!!+1
         var timebar=findViewById(R.id.result_text) as TextView
         checktime=timer(period = 60000) {
             x--// timer() 호출
