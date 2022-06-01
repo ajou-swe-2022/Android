@@ -18,12 +18,9 @@ import com.example.waguwagu.model.data.TableData
 class ReservetableFragment : Fragment() {
     lateinit var binding : FragmentReservetableBinding
     lateinit var tableId : String
+    lateinit var resID : String
+    lateinit var descript : String
 
-    inner class tableIdSelected {
-        fun getTableId(TableId : String){
-            tableId = TableId
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +41,7 @@ class ReservetableFragment : Fragment() {
         }
 
  */
-
+        binding.descript.text = descript
         binding.seatImg.setOnClickListener {
             var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.naver.com"))
             startActivity(intent)
@@ -59,6 +56,6 @@ class ReservetableFragment : Fragment() {
     }
 
     fun tablerecycle(datas : List<TableData>){
-        binding.tableRecyclerview.adapter = TableAdapter(datas)
+        binding.tableRecyclerview.adapter = TableAdapter(datas, resID)
     }
 }

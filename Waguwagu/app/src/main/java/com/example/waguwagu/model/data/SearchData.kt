@@ -11,6 +11,8 @@ data class SearchData(
     val addressDetail:String,
     @SerializedName("category")
     val resttag:String,
+    @SerializedName("description")
+    val descript:String,
 
     @SerializedName("countEnabledTable")
     val restadmit:Int,

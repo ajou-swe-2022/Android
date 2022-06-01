@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.waguwagu.databinding.ReserveTableBinding
 import com.example.waguwagu.model.data.TableData
 
-class TableAdapter (val data:List<TableData>) : RecyclerView.Adapter<TableAdapter.TableViewHolder>() {
+class TableAdapter (val data:List<TableData>, resID: String) : RecyclerView.Adapter<TableAdapter.TableViewHolder>() {
 
+    val resID = resID
 
     lateinit var binding : ReserveTableBinding
     inner class TableViewHolder(private val binding : ReserveTableBinding) : RecyclerView.ViewHolder(binding.root){
@@ -54,6 +55,7 @@ class TableAdapter (val data:List<TableData>) : RecyclerView.Adapter<TableAdapte
         binding.button.setOnClickListener {
             if(data[position].table_access) {
                 val intent = Intent(holder.itemView?.context, ReservenotiActivity::class.java)
+                intent.putExtra("resID", resID)
                 intent.putExtra("table_id", data[position].table_id)
                 intent.putExtra("table_name", data[position].table_name)
                 intent.putExtra("minimum_price", data[position].minimum_price)

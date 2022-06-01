@@ -24,7 +24,9 @@ class ReservenotiActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     val api = retrofit.create(menuinterface::class.java)
-    val call = api.getMenu("401-234")
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,9 @@ class ReservenotiActivity : AppCompatActivity() {
         val table_id = intent.getStringExtra("table_name")
         val table_name = findViewById<TextView>(R.id.table_name)
         table_name.text = table_id
+
+        val resID = "432-234"
+        val call = api.getMenu(resID)
 
         val reservemenuFragment = ReservemenuFragment()
         var menus : List<MenuData>? = null

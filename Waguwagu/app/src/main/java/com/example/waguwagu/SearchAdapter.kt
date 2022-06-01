@@ -43,6 +43,7 @@ class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAda
             intent.putExtra("restname", data[position].restname)
             intent.putExtra("reservetime", data[position].reservetime.toString())
             intent.putExtra("restid", data[position].id)
+            intent.putExtra("desc", data[position].descript)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

@@ -43,6 +43,7 @@ class ReservationActivity : AppCompatActivity() {
         val name = intent.getStringExtra("restname")
         val time = intent.getStringExtra("reservetime")
         val resID = intent.getStringExtra("restid")
+        val desc = intent.getStringExtra("desc")
         val restname = findViewById<TextView>(R.id.rest_name)
         restname.text = name
 
@@ -51,14 +52,14 @@ class ReservationActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(R.id.fl_container, reservetableFragment).commit()
         setDataAtFragment(reservetableFragment, query)
-
+        reservetableFragment.resID = resID!!
+        reservetableFragment.descript = desc!!
 
         var tables : List<TableData>? = null
         api.getTables(resID!!).enqueue(object : Callback<TableDatas> {
             override fun onResponse(call: Call<TableDatas>, response: Response<TableDatas>) {
                 tables = response.body()?.tables
                 reservetableFragment.tablerecycle(tables!!)
-                //reservemenuFragment.getResID(menus!![0].resID)
                 Log.d("wy","Succeed : $tables")
             }
 
