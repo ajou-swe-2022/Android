@@ -32,7 +32,13 @@ class OrderlistFragment : Fragment() {
         return binding.root
     }
     fun recyledata(datas:List<SearchData>?) {
+        val data= mutableListOf<SearchData>()
+        data.apply{
+            add(datas?.get(0)!!)
+            add(datas[1]!!)
+        }
         val dates = mutableListOf<String>()
+
         dates.apply {
             add("2022/01/12")
 
@@ -43,7 +49,7 @@ class OrderlistFragment : Fragment() {
             add("2022/05/09")
              */
         }
-        binding.orderRecyclerview.adapter = datas?.let { OrderlistAdapter(it,dates) };
+        binding.orderRecyclerview.adapter = data?.let { OrderlistAdapter(it,dates) };
 
     }
 }
