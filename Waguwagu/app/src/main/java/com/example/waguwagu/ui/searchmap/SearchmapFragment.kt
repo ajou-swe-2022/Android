@@ -42,8 +42,7 @@ import com.google.android.gms.maps.model.*
  */
 class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClickListener,GoogleMap.OnMapClickListener {
     private val ajou=LatLng(37.282753,127.044999)
-    private var listres=ArrayList<Marker>()
-    private var markercurrent: Marker? = null
+
     private var prev_marker:Marker?=null
     lateinit var mContext: Context
 
@@ -60,7 +59,7 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
 
 
     private lateinit var rootView:View
-    val datas = mutableListOf<SearchData>()
+
     lateinit var binding:FragmentSearchmapBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,19 +68,11 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
     ): View? {
 
         binding=FragmentSearchmapBinding.inflate(inflater,container,false)
-
-
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.getMapAsync(this)
         rootView=binding.getRoot()
         var searchkey = arguments?.getString("query")
-
         search(searchkey)
-
-
-
-
-
         return rootView;
 
     }
@@ -99,7 +90,7 @@ class SearchmapFragment : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClick
 
         )?.tag=0
         //음식점 임시 주소 tag를 통해 객체를 지정할 수 있음
-        var searchkey = arguments?.getString("query")
+        //var searchkey = arguments?.getString("query")
 
 
 

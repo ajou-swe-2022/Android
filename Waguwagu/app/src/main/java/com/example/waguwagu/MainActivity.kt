@@ -159,16 +159,21 @@ class MainActivity : AppCompatActivity()  {
     }
 
     fun RestDataAll(fragment: Fragment,id:Int)  {
-        SendAPI(api.getRes("ALL",.1,.1,""),fragment,id)
+        SendAPI(api.getRes("ALL",.1,.1,"",""),fragment,id)
 
     }
     fun RestDataLoc(latitude: Double,longitude:Double,fragment: Fragment,id:Int)  {
-        SendAPI(api.getRes("LOCATION",latitude,longitude,""),fragment,id)
+        SendAPI(api.getRes("LOCATION",latitude,longitude,"",""),fragment,id)
 
     }
     fun RestDataName(Name:String,fragment: Fragment,id:Int) {
-        return SendAPI(api.getRes("NAME",.1,.1,Name),fragment,id)
+        return SendAPI(api.getRes("NAME",.1,.1,Name,Name),fragment,id)
     }
+    fun RestDataTag(Tag:String,fragment: Fragment,id:Int) {
+        return SendAPI(api.getRes("CATEGORY",.1,.1,Tag,Tag),fragment,id)
+    }
+
+
     fun SendAPI(sendUrl:Call<RestaurantsData>,fragment: Fragment,id:Int ){
 
         sendUrl.enqueue(object : Callback<RestaurantsData> {

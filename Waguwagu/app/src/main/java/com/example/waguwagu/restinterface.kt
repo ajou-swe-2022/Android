@@ -18,7 +18,8 @@ interface resinterface {
         @Query("type") type:String,
         @Query("latitude") latitude:Double,
         @Query("longitude") longitude:Double,
-        @Query("name") name:String
+        @Query("name") name:String,
+        @Query("category") category:String
     ) :Call<RestaurantsData>
 
     @GET("restaurants/{id}")

@@ -20,7 +20,8 @@ class CategoryAdapter(val data:List<String>,val fragment: HomeFragment) : Recycl
 
         init {
           binding.categoryName.setOnClickListener {
-              (fragment.activity as MainActivity).setCategory(binding.categoryName.text.toString())
+              if(binding.categoryName.text.toString()=="아시안") (fragment.activity as MainActivity).setCategory("category:"+"ASIAN")
+              else (fragment.activity as MainActivity).setCategory("category:"+binding.categoryName.text.toString())
               //(fragment.activity as MainActivity).RestDataAll();
           }
           }

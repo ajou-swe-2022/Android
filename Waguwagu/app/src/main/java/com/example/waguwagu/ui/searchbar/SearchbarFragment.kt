@@ -26,7 +26,9 @@ class SearchbarFragment : Fragment() {
 
 
         if(!searchkey.isNullOrBlank()) {
-            (activity as MainActivity).RestDataName(searchkey,this@SearchbarFragment,3)
+                if(searchkey.contains("category:")) (activity as MainActivity).RestDataTag(searchkey.substring(9),this@SearchbarFragment,3)
+
+                else (activity as MainActivity).RestDataName(searchkey,this@SearchbarFragment,3)
         }
         else{
            (activity as MainActivity).RestDataAll(this@SearchbarFragment,3)

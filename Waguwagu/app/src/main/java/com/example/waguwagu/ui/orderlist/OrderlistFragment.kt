@@ -35,8 +35,9 @@ class OrderlistFragment : Fragment() {
         val dates = mutableListOf<String>()
         dates.apply {
             add("2022/01/12")
-            /*
+
             add("2022/02/23")
+            /*
             add("2022/02/28")
             add("2022/03/03")
             add("2022/05/09")
