@@ -26,6 +26,7 @@ class SearchbarFragment : Fragment() {
 
 
         if(!searchkey.isNullOrBlank()) {
+            //Log.d("wy","Succeed2 : $searchkey")
                 if(searchkey.contains("category:")) (activity as MainActivity).RestDataTag(searchkey.substring(9),this@SearchbarFragment,3)
 
                 else (activity as MainActivity).RestDataName(searchkey,this@SearchbarFragment,3)

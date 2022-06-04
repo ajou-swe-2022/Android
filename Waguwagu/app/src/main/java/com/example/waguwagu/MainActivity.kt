@@ -171,10 +171,10 @@ class MainActivity : AppCompatActivity()  {
 
     }
     fun RestDataName(Name:String,fragment: Fragment,id:Int) {
-        return SendAPI(api.getRes("NAME",.1,.1,Name,Name),fragment,id)
+        SendAPI(api.getRes("NAME",.1,.1,Name,""),fragment,id)
     }
     fun RestDataTag(Tag:String,fragment: Fragment,id:Int) {
-        return SendAPI(api.getRes("CATEGORY",.1,.1,Tag,Tag),fragment,id)
+        SendAPI(api.getRes("CATEGORY",.1,.1,"",Tag),fragment,id)
     }
 
 
@@ -182,7 +182,6 @@ class MainActivity : AppCompatActivity()  {
 
         sendUrl.enqueue(object : Callback<RestaurantsData> {
             override fun onResponse(call: Call<RestaurantsData>, response: Response<RestaurantsData>) {
-
                 var senddata=response.body()?.restaurants
                 if(id==1) {
                     (fragment as HomeFragment).recycledata(senddata)
