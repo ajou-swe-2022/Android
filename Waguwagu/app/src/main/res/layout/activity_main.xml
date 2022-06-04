@@ -59,23 +59,23 @@
                 android:paddingEnd="16dp">
 
 
-
                 <TextView
                     android:id="@+id/result_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:foregroundGravity="center_horizontal"
-                    app:iconifiedByDefault="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:autoSizeMinTextSize="14dp"
+                    android:autoSizeTextType="uniform"
                     android:background="@color/gray"
+                    android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
                     android:text="현재 예약 방문 시간:X분"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:textStyle="bold"
+                    app:iconifiedByDefault="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
 
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
