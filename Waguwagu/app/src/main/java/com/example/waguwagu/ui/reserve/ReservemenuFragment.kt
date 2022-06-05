@@ -110,9 +110,10 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
                     numbers.removeAt(index)
                     send_number.removeAt(index)
                 }
-                else // 0개가 아니라면 그대로 갯수만 수정
+                else {// 0개가 아니라면 그대로 갯수만 수정
                     numbers[index] = number.toString() + "개"
                     send_number[index] = number
+                }
             }
             else{ // plus menu
                 if(index != -1){ // 리스트에 존재한다면 갯수만 수정

@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.121" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/component_round.xml" value="0.1" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/ic_category.xml" value="0.1" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/ic_mymenu.xml" value="0.1" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/drawable/ic_searchmap.xml" value="0.121" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -16,8 +17,11 @@
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_searchbar.xml" value="0.25364583333333335" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_searchmap.xml" value="0.18885869565217392" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/fragment_setting.xml" value="0.21920289855072464" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/menu_list_item.xml" value="0.15217391304347827" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/popup_reserve.xml" value="0.4" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/reserve_table.xml" value="0.11666666666666667" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/search_list_item.xml" value="0.264" />
+        <entry key="..\:/android-projects/Waguwagu/app/src/main/res/layout/selected_menus.xml" value="0.12335359675785208" />
         <entry key="..\:/android-projects/Waguwagu/app/src/main/res/menu/navi_menu.xml" value="0.25" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable-small/ic_maker_click.xml" value="0.1" />
         <entry key="..\:/download/Study/SWE/Android/Waguwagu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
