@@ -20,6 +20,7 @@ class ReservetableFragment : Fragment() {
     lateinit var tableId : String
     lateinit var resID : String
     lateinit var descript : String
+    var table_num : Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +47,7 @@ class ReservetableFragment : Fragment() {
             var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.naver.com"))
             startActivity(intent)
         }
+        binding.reserveNum.text = table_num.toString();
 
         if(!string_name_time.isNullOrEmpty()) {
             binding.restNameWrap.text = string_name_time[0]

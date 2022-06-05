@@ -44,6 +44,7 @@ class ReservationActivity : AppCompatActivity() {
         val time = intent.getStringExtra("reservetime")
         val resID = intent.getStringExtra("restid")
         val desc = intent.getStringExtra("desc")
+        val table_num = intent.getIntExtra("table_num", 0)
         val restname = findViewById<TextView>(R.id.rest_name)
         restname.text = name
 
@@ -54,6 +55,7 @@ class ReservationActivity : AppCompatActivity() {
         setDataAtFragment(reservetableFragment, query)
         reservetableFragment.resID = resID!!
         reservetableFragment.descript = desc!!
+        reservetableFragment.table_num = table_num!!
 
         var tables : List<TableData>? = null
         api.getTables(resID!!).enqueue(object : Callback<TableDatas> {

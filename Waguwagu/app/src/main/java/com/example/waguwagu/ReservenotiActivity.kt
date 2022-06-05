@@ -42,8 +42,8 @@ class ReservenotiActivity : AppCompatActivity() {
         val table_name = findViewById<TextView>(R.id.table_name)
         table_name.text = table_id
 
-        val resID = "432-234"
-        val call = api.getMenu(resID)
+        val resID = intent.getStringExtra("resID")
+        val call = api.getMenu(resID!!)
 
         val reservemenuFragment = ReservemenuFragment()
         var menus : List<MenuData>? = null
