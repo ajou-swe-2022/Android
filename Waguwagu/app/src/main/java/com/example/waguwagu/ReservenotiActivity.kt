@@ -41,6 +41,7 @@ class ReservenotiActivity : AppCompatActivity() {
         val table_id = intent.getStringExtra("table_name")
         val table_name = findViewById<TextView>(R.id.table_name)
         table_name.text = table_id
+        val id = intent.getIntExtra("table_id", 0)
 
         val resID = intent.getStringExtra("resID")
         val call = api.getMenu(resID!!)
@@ -52,6 +53,7 @@ class ReservenotiActivity : AppCompatActivity() {
                 menus = response.body()?.items
                 reservemenuFragment.menurecycle(menus!!)
                 reservemenuFragment.getResID(menus!![0].resID)
+                reservemenuFragment.table_id = id!!
                 Log.d("wy","Succeed : $menus")
             }
 

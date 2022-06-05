@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.waguwagu.*
 import com.example.waguwagu.databinding.FragmentReservemenuBinding
 import com.example.waguwagu.model.data.*
@@ -44,6 +46,7 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
     val link = getMenuSelected()
     val send_number = mutableListOf<Int>()
     var resID : String? = null
+    var table_id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -179,9 +182,11 @@ class ReservemenuFragment : Fragment(), View.OnClickListener {
             val input = HashMap<String, Any>()
             input.put("orders", reserve_menus)
             input.put("restaurantID", resID!!)
+            input.put("tableID", table_id)
             input.put("userID", 0)
 
             api.postReserve(input).enqueue(object : Callback<Void>{
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     Log.d("test", "Success : ${response.isSuccessful}")
                     Toast.makeText(getActivity(), "예약이 완료되었습니다.", Toast.LENGTH_SHORT).show()
