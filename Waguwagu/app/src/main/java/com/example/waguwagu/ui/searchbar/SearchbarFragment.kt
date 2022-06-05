@@ -44,12 +44,13 @@ class SearchbarFragment : Fragment() {
     fun recyledata(datas:List<SearchData>?) {
 
 
-        if (datas?.isEmpty()==true) {
+        if (datas==null) {
             binding.resultText.setVisibility(View.VISIBLE)
             binding.resultText.text = "일치하는 음식점이 없습니다."
         } else {
-            binding.searchRecyclerview.adapter = datas?.let { SearchAdapter(it) }
             binding.resultText.setVisibility(View.GONE)
+            binding.searchRecyclerview.adapter = datas?.let { SearchAdapter(it) }
+
         }
 
     }

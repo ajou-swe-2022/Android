@@ -42,7 +42,8 @@ class HomeFragment : Fragment()  {
         val datas2 = mutableListOf<String>()
         val datas3 = mutableListOf<String>()
         val datas4 = mutableListOf<String>()
-        val datas = mutableListOf<SearchData>()
+
+
         datas1.apply {
             add("일식")
             add("피자")
@@ -50,6 +51,7 @@ class HomeFragment : Fragment()  {
             add("까페·디저트")
 
         }
+
         datas2.apply {
             add("양식")
             add("분식")
@@ -57,6 +59,7 @@ class HomeFragment : Fragment()  {
             add("백반·죽·국수")
 
         }
+
         datas3.apply {
             add("야식")
             add("아시안")
@@ -64,21 +67,14 @@ class HomeFragment : Fragment()  {
             add("고기·구이")
 
         }
+
+
         datas4.apply {
             add("족발·보쌈")
             add("패스트푸드")
-            add("한식")
-        }
-        /*
-        datas.apply {
-            add(SearchData("McDonalds", "Hamburger", "3", "12", "30"))
-            add(SearchData("롯데리아", "Hamburger", 3, 12, "30"))
-            add(SearchData("본죽", "한식", 3, 12, 30))
-            add(SearchData("푸라닭", "한식", 3, 12, 30))
-            add(SearchData("팔달관매점", "호텔", 3, 12, 30))
         }
 
-         */
+
         binding.categoryRecyclerview1.adapter=CategoryAdapter(datas1,this@HomeFragment)
         binding.categoryRecyclerview2.adapter=CategoryAdapter(datas2,this@HomeFragment)
         binding.categoryRecyclerview3.adapter=CategoryAdapter(datas3,this@HomeFragment)

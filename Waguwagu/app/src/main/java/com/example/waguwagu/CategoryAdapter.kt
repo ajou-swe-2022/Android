@@ -20,8 +20,22 @@ class CategoryAdapter(val data:List<String>,val fragment: HomeFragment) : Recycl
 
         init {
           binding.categoryName.setOnClickListener {
-              if(binding.categoryName.text.toString()=="아시안") (fragment.activity as MainActivity).setCategory("category:"+"ASIAN")
-              else (fragment.activity as MainActivity).setCategory("category:"+binding.categoryName.text.toString())
+              when (binding.categoryName.text.toString()) {
+                   "일식"  ->  (fragment.activity as MainActivity).setCategory("category:"+"JAPANESE")
+                  "피자" ->(fragment.activity as MainActivity).setCategory("category:"+"PIZZA")
+                  "중식" -> (fragment.activity as MainActivity).setCategory("category:"+"CHINESE")
+                  "까페·디저트"->(fragment.activity as MainActivity).setCategory("category:"+"CAFE")
+                  "양식" ->(fragment.activity as MainActivity).setCategory("category:"+"WESTERN")
+                  "분식" ->(fragment.activity as MainActivity).setCategory("category:"+"SNACK")
+                  "치킨"->(fragment.activity as MainActivity).setCategory("category:"+"CHICKEN")
+                  "백반·죽·국수" ->(fragment.activity as MainActivity).setCategory("category:"+"NOODLE")
+                  "야식" ->(fragment.activity as MainActivity).setCategory("category:"+"NIGHT")
+                  "아시안" ->(fragment.activity as MainActivity).setCategory("category:"+"ASIAN")
+                  "찜·탕·찌개"->(fragment.activity as MainActivity).setCategory("category:"+"SOUP")
+                  "고기·구이"->(fragment.activity as MainActivity).setCategory("category:"+"MEAT")
+                  "족발·보쌈"->(fragment.activity as MainActivity).setCategory("category:"+"LEG")
+                  "패스트푸드" ->(fragment.activity as MainActivity).setCategory("category:"+"FAST")
+              }
               //(fragment.activity as MainActivity).RestDataAll();
           }
           }
