@@ -15,7 +15,8 @@ data class reservation(
     val restaurantID: String,
     val status: String,
     val totalPrice: Int,
-    val userID: Int
+    val userID: Int,
+    val deadlineTime:Int
 
 )
 

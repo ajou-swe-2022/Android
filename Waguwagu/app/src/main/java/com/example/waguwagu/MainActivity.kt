@@ -1,6 +1,7 @@
 package com.example.waguwagu
 
 import android.content.Context
+import android.icu.text.SimpleDateFormat
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
@@ -31,8 +32,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.concurrent.timer
 
@@ -236,39 +240,37 @@ class MainActivity : AppCompatActivity()  {
         var timebar=findViewById(R.id.result_text) as TextView
         timebar.text="${restName} 예약 요청 확인 중 잠시만 기다려주세요"
         checkans=timer(period = 10000) {
-            sendReservecheck(userId,restId,sendTime)
+            sendReservecheck(userId,restId,restName)
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
-    fun sendReservecheck(userId:Int,restId:String,sendTime: Int?) {
+    fun sendReservecheck(userId:Int,restId:String,restName:String) {
         Log.d("wy","$userId")
         rescheckapi.getReserv(userId.toString()).enqueue(object : Callback<reservecheckData> {
             override fun onResponse(call: Call<reservecheckData>, response: Response<reservecheckData>) {
                 var senddata=response.body()?.reservations
                 var check=0;
                     if (senddata != null) {
-                        var current = LocalDateTime.now();
-                        var instant = current.atZone(ZoneId.systemDefault()).toInstant();
-                        val currenttime= Date.from(instant).time/1000;
+
+                        val currenttime=  System.currentTimeMillis()/1000;
 
                         check=0;
+
                         for(x in senddata) {
-
-
-                            val resDate = Date(x.createdTimeAt.toLong()* 1000)
-                            Log.d("wy","Succeed : ${currenttime} , ${x.createdTimeAt}, ${currenttime-x.createdTimeAt}")
                             if((currenttime-x.createdTimeAt<=300)) {
+                                Log.d("wy","Succeed : ${currenttime} , ${x.createdTimeAt}, ${currenttime-x.createdTimeAt}")
                                 check=1;
-                                if (x.restaurantID == restId && x.status == "rejected") {
-                                    checkans?.cancel();
-                                    checktime(restId, sendTime);
-                                }
-                                if (x.restaurantID == restId && x.status == "approved") {
+                                if (x.restaurantID == restId && x.status == "REJECTED") {
                                     checkans?.cancel();
                                     rescancle();
                                 }
-                            }
+                                else if (x.restaurantID == restId && x.status == "APPROVED") {
+                                    checkans?.cancel();
+                                    Log.d("wy","Succeed2 : ${x.id}")
+                                    checktime(userId,restId, x.id,x.deadlineTime);
+                                }
 
+                            }
                         }
                         if(check==0) {
                             checkans?.cancel();
@@ -281,27 +283,30 @@ class MainActivity : AppCompatActivity()  {
             }
         })
     }
-    fun checktime(restId: String,sendTime: Int?) {
-        var x=sendTime!!+1
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checktime(userId:Int,restId: String,reservationId:Int,sendTime: Int?) {
+        var x=10000;
         var mToolbar = findViewById(R.id.toolBar) as Toolbar
         var timebar=findViewById(R.id.result_text) as TextView
-        checktime=timer(period = 60000) {
-            x--// timer() 호출
+        val netDate = LocalDateTime.ofEpochSecond(sendTime!!*1000L,0, ZoneOffset.of("+9"));
+        val formatter = DateTimeFormatter.ofPattern("h:mm a")
+        val formatted = netDate.format(formatter)
+        timebar.text="예약시간내 방문  $formatted";
+        checktime=timer(period = 10000) {
+            x--;
+            if(x!=0) checkDone( userId,reservationId)
             runOnUiThread {
-                if(x==0) {
-                    timebar.text="예약 방문 시간이 만료되었습니다"
 
+                if (x == 0) {
+                    timebar.text = "예약이 만료되었습니다"
+
+                }
+                else if(x<0) {
+                    mToolbar.setVisibility(View.GONE)
                     checktime?.cancel()
                 }
-                else if(x==-1) {
-                    mToolbar.setVisibility(View.GONE)
-
-                }
-                else timebar.text="${restId} 예약 방문 시간 ${x}분 남았습니다"
-
             }
         }
-
     }
     fun rescancle() {
         var x = 2;
@@ -319,6 +324,37 @@ class MainActivity : AppCompatActivity()  {
             }
 
         }
+    }
+    fun checkDone(userid:Int,reseravtionId:Int) {
+
+        rescheckapi.getReserv(userid.toString()).enqueue(object : Callback<reservecheckData> {
+        override fun onResponse(call: Call<reservecheckData>, response: Response<reservecheckData>) {
+            var senddata=response.body()?.reservations
+
+            var check=0;
+            if (senddata != null) {
+
+                for(x in senddata) {
+
+                    if(reseravtionId==x.id) {
+                        check=1;
+                    }
+                }
+
+            }
+            if(check==0) { var mToolbar = findViewById(R.id.toolBar) as Toolbar
+                checktime?.cancel();
+                mToolbar.setVisibility(View.GONE)
+            };
+        }
+        override fun onFailure(call: Call<reservecheckData>, t: Throwable) {
+            Log.d("ch","Failed : $t")
+        }
+    })
+
+
+
+
     }
 
 

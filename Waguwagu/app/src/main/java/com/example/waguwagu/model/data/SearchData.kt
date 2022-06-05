@@ -26,7 +26,7 @@ data class SearchData(
     val longitude:Double,
     @SerializedName("name")
     val restname:String,
-    val tel:String,
+    val tel:String
 
     )
 

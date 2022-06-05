@@ -19,6 +19,10 @@ class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAda
                 binding.restAdmit.text = searchData.restadmit.toString()
                 binding.restSeatNum.text = searchData.restseatnum.toString()
                 binding.reserveTime.text = searchData.reservetime.toString()
+                when(searchData.restname) {
+
+                 "맥도날드"-> binding.restImg.setImageResource(R.drawable.menu_example)
+                }
             }
     }
 
