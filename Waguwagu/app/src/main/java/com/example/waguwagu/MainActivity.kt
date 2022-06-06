@@ -267,7 +267,7 @@ class MainActivity : AppCompatActivity()  {
                                 else if (x.restaurantID == restId && x.status == "APPROVED") {
                                     checkans?.cancel();
                                     Log.d("wy","Succeed2 : ${x.id}")
-                                    checktime(userId,restId, x.id,x.deadlineTime);
+                                    checktime(userId,restName, x.id,x.deadlineTime);
                                 }
 
                             }
@@ -284,24 +284,22 @@ class MainActivity : AppCompatActivity()  {
         })
     }
     @RequiresApi(Build.VERSION_CODES.O)
-    fun checktime(userId:Int,restId: String,reservationId:Int,sendTime: Int?) {
-        var x=10000;
+    fun checktime(userId:Int,restName: String,reservationId:Int,sendTime: Int?) {
+
+        var x=sendTime!!-(System.currentTimeMillis()/1000)+10
         var mToolbar = findViewById(R.id.toolBar) as Toolbar
         var timebar=findViewById(R.id.result_text) as TextView
         val netDate = LocalDateTime.ofEpochSecond(sendTime!!*1000L,0, ZoneOffset.of("+9"));
         val formatter = DateTimeFormatter.ofPattern("h:mm a")
         val formatted = netDate.format(formatter)
-        timebar.text="예약시간내 방문  $formatted";
+        timebar.text="${restName} 예약시간내 방문  $formatted";
         checktime=timer(period = 10000) {
-            x--;
-            if(x!=0) checkDone( userId,reservationId)
+            x-=10;
+            checkDone( userId,reservationId)
             runOnUiThread {
 
-                if (x == 0) {
+           if(x<0) {
                     timebar.text = "예약이 만료되었습니다"
-
-                }
-                else if(x<0) {
                     mToolbar.setVisibility(View.GONE)
                     checktime?.cancel()
                 }
