@@ -44,7 +44,7 @@ class ReservetableFragment : Fragment() {
  */
         binding.descript.text = descript
         binding.seatImg.setOnClickListener {
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.naver.com"))
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://jwaseokbachi"))
             startActivity(intent)
         }
         binding.reserveNum.text = table_num.toString();

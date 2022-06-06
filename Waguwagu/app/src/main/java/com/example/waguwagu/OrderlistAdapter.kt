@@ -43,6 +43,9 @@ class OrderlistAdapter (val data:List<SearchData>, val date_reserved : List<Stri
             val intent = Intent(holder.itemView?.context, ReservationActivity::class.java)
             intent.putExtra("restname", data[position].restname)
             intent.putExtra("reservetime", data[position].reservetime.toString())
+            intent.putExtra("restid", data[position].id)
+            intent.putExtra("desc", data[position].descript)
+            intent.putExtra("table_num", data[position].restadmit)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
