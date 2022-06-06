@@ -48,7 +48,7 @@ class HomeFragment : Fragment()  {
             add("일식")
             add("피자")
             add("중식")
-            add("까페·디저트")
+            add("카페·디저트")
 
         }
 

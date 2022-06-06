@@ -31,9 +31,7 @@ class SearchbarFragment : Fragment() {
 
                 else (activity as MainActivity).RestDataName(searchkey,this@SearchbarFragment,3)
         }
-        else{
-           (activity as MainActivity).RestDataAll(this@SearchbarFragment,3)
-        }
+
 
         return binding.root
     }

@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.appcompat.view.menu.MenuView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.waguwagu.databinding.SearchListItemBinding
 import com.example.waguwagu.model.data.SearchData
+import kotlin.coroutines.coroutineContext
 
 class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
@@ -16,13 +18,33 @@ class SearchAdapter (val data:List<SearchData>) : RecyclerView.Adapter<SearchAda
         fun bind(searchData: SearchData){
                 binding.restName.text = searchData.restname
                 binding.restTag.text = searchData.resttag
+            when ( searchData.resttag.toString()) {
+                "JAPANESE"  ->  binding.restTag.text="일식"
+                "PIZZA" ->    binding.restTag.text="피자"
+                "CHINESE" ->  binding.restTag.text="중식"
+                "CAFE"-> binding.restTag.text="카페·디저트"
+                "WESTERN" -> binding.restTag.text="양식"
+                "SNACK" -> binding.restTag.text="분식"
+                "CHICKEN"-> binding.restTag.text="치킨"
+                "NOODLE" -> binding.restTag.text="백반·죽·국수"
+                "NIGHT" -> binding.restTag.text="야식"
+                "ASIAN" -> binding.restTag.text="아시안"
+                "SOUP"-> binding.restTag.text="찜·탕·찌개"
+                "MEAT"-> binding.restTag.text="고기·구이"
+                "LEG"-> binding.restTag.text="족발·보쌈"
+                "FAST" -> binding.restTag.text="패스트푸드"
+            }
                 binding.restAdmit.text = searchData.restadmit.toString()
                 binding.restSeatNum.text = searchData.restseatnum.toString()
                 binding.reserveTime.text = searchData.reservetime.toString()
-                when(searchData.restname) {
 
-                 "맥도날드"-> binding.restImg.setImageResource(R.drawable.menu_example)
-                }
+                Glide.with(binding.restAdmit.context)
+                    .load(searchData.imgUrl)
+                    .placeholder(R.drawable.ic_mymenu) // 이미지 로딩 시작하기 전 표시할 이미지
+                    .error(R.drawable.ic_mymenu) // 로딩 에러 발생 시 표시할 이미지
+                    .fallback(R.drawable.ic_mymenu) // 로드할 url 이 비어있을(null 등) 경우 표시할 이미지
+                    .into(binding.restImg) // 이미지를 넣을 뷰
+
             }
     }
 

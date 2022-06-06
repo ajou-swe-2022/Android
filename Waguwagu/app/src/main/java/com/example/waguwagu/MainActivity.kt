@@ -285,11 +285,14 @@ class MainActivity : AppCompatActivity()  {
     }
     @RequiresApi(Build.VERSION_CODES.O)
     fun checktime(userId:Int,restName: String,reservationId:Int,sendTime: Int?) {
-
-        var x=sendTime!!-(System.currentTimeMillis()/1000)+10
+        //var x=System.currentTimeMillis()/1000;
+        Log.d("wy","Succeed2 : ${System.currentTimeMillis()/1000} ,${sendTime}")
         var mToolbar = findViewById(R.id.toolBar) as Toolbar
         var timebar=findViewById(R.id.result_text) as TextView
-        val netDate = LocalDateTime.ofEpochSecond(sendTime!!*1000L,0, ZoneOffset.of("+9"));
+        val netDate = LocalDateTime.ofEpochSecond(sendTime!!.toLong(),0, ZoneOffset.of("+9"));
+        val nowDate =LocalDateTime.now()
+        var x=netDate.toEpochSecond(ZoneOffset.of("+9"))-nowDate.toEpochSecond(ZoneOffset.of("+9"))
+        Log.d("wy","Succeed3 : ${x}");
         val formatter = DateTimeFormatter.ofPattern("h:mm a")
         val formatted = netDate.format(formatter)
         timebar.text="${restName} 예약시간내 방문  $formatted";

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.waguwagu.databinding.OrderListItemBinding
 import com.example.waguwagu.model.data.SearchData
 
@@ -20,6 +21,12 @@ class OrderlistAdapter (val data:List<SearchData>, val date_reserved : List<Stri
             when(searchData.restname) {
                 "맥도날드"-> binding.restImg.setImageResource(R.drawable.menu_example)
             }
+            Glide.with(binding.restAdmit.context)
+                .load(searchData.imgUrl)
+                .placeholder(R.drawable.ic_mymenu) // 이미지 로딩 시작하기 전 표시할 이미지
+                .error(R.drawable.ic_mymenu) // 로딩 에러 발생 시 표시할 이미지
+                .fallback(R.drawable.ic_mymenu) // 로드할 url 이 비어있을(null 등) 경우 표시할 이미지
+                .into(binding.restImg) // 이미지를 넣을 뷰
             binding.date.text = date
         }
     }
