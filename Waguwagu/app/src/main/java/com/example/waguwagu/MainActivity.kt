@@ -293,16 +293,20 @@ class MainActivity : AppCompatActivity()  {
         val formatter = DateTimeFormatter.ofPattern("h:mm a")
         val formatted = netDate.format(formatter)
         timebar.text="${restName} 예약시간내 방문  $formatted";
-
+        var check=0;
         checktime=timer(period = 10000) {
 
             checkDone( userId,reservationId)
             runOnUiThread {
-           if(LocalDateTime.now().isAfter(netDate)) {
+                if(check==1) {
                     timebar.text = "예약이 만료되었습니다"
-                    Thread.sleep(1_0000)
+
                     mToolbar.setVisibility(View.GONE)
                     checktime?.cancel()
+                }
+               else if(LocalDateTime.now().isAfter(netDate)) {
+               check=1;
+
                 }
             }
         }
